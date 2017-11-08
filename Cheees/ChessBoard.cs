@@ -14,7 +14,7 @@ namespace Cheees
 
         Random rnd = new Random();
         TileChess[,] chessTiles;
-        bool FlagHod = false; // 0 == WHITE ;; 1 == BLACK
+       
         public List<Pawn> pawnsWhite;
         public List<Pawn> pawnsBlack;
         public List<ChessPosition> moveList;
@@ -138,23 +138,12 @@ namespace Cheees
         }
 
 
-        public void updateChess()
-        {
-            if(FlagHod == false)
-            {
-                updateWhite();
-                return;
-            }
-            if (FlagHod == true)
-            {
-                updateBlack();
-                return;
-            }
-        }
+        
 
         public void updateBlack()
         {
             int rand = rnd.Next(1);
+            int ChessRand = rnd.Next(8);
             int CurrentChees = 0;
             int buffer = 0;
             int Best = 0;
@@ -162,6 +151,10 @@ namespace Cheees
             {
                 buffer = CheeesBlack[i].AlpBet(this);
                 if (buffer > Best) { Best = buffer; CurrentChees = i; }
+            }
+            if (Best == 50)
+            {
+                CurrentChees = ChessRand;
             }
             moveList = CheeesBlack[CurrentChees].move(this);
             if (moveList.Count != 0)
@@ -180,7 +173,6 @@ namespace Cheees
                 Console.Out.Write("Черная пешка # " + CurrentChees + " ходит на координаты " + " X:" + moveList[0].x + " Y:" + moveList[0].y);
                 draw();
                 update();
-                FlagHod = false;
             }
             else
             {
@@ -193,6 +185,7 @@ namespace Cheees
         public void updateWhite()
         {
             int rand = rnd.Next(1);
+            int ChessRand = rnd.Next(8);
             int CurrentChees = 0;
             int buffer = 0;
             int Best = 0;
@@ -200,6 +193,10 @@ namespace Cheees
             {
                 buffer = CheeesWhite[i].AlpBet(this);
                 if (buffer > Best) { Best = buffer; CurrentChees = i; }
+            }
+            if (Best == 50)
+            {
+                CurrentChees = ChessRand;
             }
             moveList = CheeesWhite[CurrentChees].move(this);
             if (moveList.Count != 0)
@@ -218,7 +215,6 @@ namespace Cheees
                 Console.Out.Write("Белая пешка # " + CurrentChees + " ходит на координаты " + " X:" + moveList[0].x + " Y:" + moveList[0].y);
                 draw();
                 update();
-                FlagHod = true;
             }
             else
             {

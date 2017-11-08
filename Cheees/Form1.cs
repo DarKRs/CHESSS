@@ -14,25 +14,45 @@ namespace Cheees
     {
         Graphics g;
         ChessBoard cb;
+        bool FlagHod;
         public Form1()
         {
             InitializeComponent();
             g = pictureBox1.CreateGraphics();
             cb = new ChessBoard(g);
-
+            FlagHod = false; // 0 == WHITE ;; 1 == BLACK
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             
             cb.draw();
-           
 
+            Hod.Visible = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            cb.updateChess();
+            updateChess();
+        }
+
+        private void updateChess()
+        {
+            if (FlagHod == false)
+            {
+                Hod.Text = "Ход черных";
+                cb.updateWhite();
+                FlagHod = true;
+                return;
+            }
+            if (FlagHod == true)
+            {
+                Hod.Text = "Ход белых";
+                cb.updateBlack();
+                FlagHod = false;
+                return;
+            }
         }
     }
 }

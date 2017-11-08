@@ -33,47 +33,166 @@ namespace Cheees
 
             if (ChessColor == "WHITE")
             {
-                ChessPosition y1 = new ChessPosition(x, y - 1);
-                ChessPosition y2 = new ChessPosition(x, y - 2);
-
-                moveList.Add(y1);
-                moveList.Add(y2);
+                ChessPosition[] poss = new ChessPosition[16];
+                for (int i = 1; i < 8; i++)
+                {
+                    poss[i] = new ChessPosition(x, y - i);
+                    poss[i] = new ChessPosition(x + i, y);
+                    moveList.Add(poss[i]);
+                }
+                for (int i = 1; i < 8; i++)
+                {
+                    poss[i] = new ChessPosition(x, y + i);
+                    poss[i] = new ChessPosition(x - i, y);
+                    moveList.Add(poss[i]);
+                }
+                for (int i = 1; i < 8; i++)
+                {
+                    poss[i] = new ChessPosition(x, y + i);
+                    poss[i] = new ChessPosition(x + i, y);
+                    moveList.Add(poss[i]);
+                }
+                for (int i = 1; i < 8; i++)
+                {
+                    poss[i] = new ChessPosition(x, y - i);
+                    poss[i] = new ChessPosition(x - i, y);
+                    moveList.Add(poss[i]);
+                }
 
 
                 foreach (Figure figure in White)
                 {
-                    if ((y - 1 == figure.y && x == figure.x) || y - 1 < 0)
+                    for (int i = 0; i < 8; i++)
                     {
-                        Score1 = 0;
+                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 0;
 
-                    }
-                    if ((y - 2 == figure.y && x == figure.x) || y - 2 < 0)
-                    {
-                        Score2 = 0;
+                        }
+                        if ((y == figure.y && x + i  == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 0;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 0;
+
+                        }
+                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 0;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 0;
+
+                        }
+                        if ((y == figure.y && x + i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 0;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 0;
+
+                        }
+                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 0;
+                        }
                     }
                 }
                 foreach (Figure figure in Black)
                 {
-                    if ((y - 1 == figure.y && x == figure.x) || y - 1 < 0)
+                    for (int i = 0; i < 8; i++)
                     {
-                        Score1 = 100;
+                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 100;
 
-                    }
-                    if ((y - 2 == figure.y && x == figure.x) || y - 2 < 0)
-                    {
-                        Score2 = 100;
+                        }
+                        if ((y == figure.y && x + i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 100;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 100;
+
+                        }
+                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 100;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 100;
+
+                        }
+                        if ((y == figure.y && x + i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 100;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 100;
+
+                        }
+                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 100;
+                        }
                     }
                 }
                 foreach (Figure figure in allFigure)
                 {
-                    if ((y - 1 != figure.y && x != figure.x) || y - 1 < 0)
+                    for (int i = 0; i < 8; i++)
                     {
-                        Score1 = 50;
+                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 50;
 
-                    }
-                    if ((y - 2 != figure.y && x != figure.x) || y - 2 < 0)
-                    {
-                        Score2 = 50;
+                        }
+                        if ((y == figure.y && x + i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 50;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 50;
+
+                        }
+                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 50;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 50;
+
+                        }
+                        if ((y == figure.y && x + i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 50;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 50;
+
+                        }
+                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 50;
+                        }
                     }
                 }
 
@@ -115,42 +234,137 @@ namespace Cheees
 
         override public List<ChessPosition> move(ChessBoard chessBoard)
         {
-            int Score = 0;
-            int Best_Score = Score;
             List<ChessPosition> moveList = new List<ChessPosition>();
             List<Figure> allFigure = new List<Figure>();
             allFigure.AddRange(chessBoard.CheeesBlack);
             allFigure.AddRange(chessBoard.CheeesWhite);
-            /* List<Figure> White = new List<Figure>();
+             List<Figure> White = new List<Figure>();
              List<Figure> Black = new List<Figure>();
              Black.AddRange(chessBoard.CheeesBlack);
-             White.AddRange(chessBoard.CheeesWhite);*/
+             White.AddRange(chessBoard.CheeesWhite);
 
 
             if (ChessColor == "WHITE")
             {
-                ChessPosition y1 = new ChessPosition(x, y - 1);
-                ChessPosition y2 = new ChessPosition(x, y - 2);
-
-                moveList.Add(y1);
-                moveList.Add(y2);
-
-
-                foreach (Figure figure in allFigure)
+                ChessPosition[] poss = new ChessPosition[16];
+                for (int i = 1; i < 8; i++)
                 {
-                    if ((y - 1 == figure.y && x == figure.x) || y - 1 < 0)
-                    {
-                        moveList.Remove(y1);
-
-                    }
-                    if ((y - 2 == figure.y && x == figure.x) || y - 2 < 0)
-                    {
-                        moveList.Remove(y2);
-                    }
+                    poss[i] = new ChessPosition(x, y - i);
+                    poss[i] = new ChessPosition(x + i, y);
+                    moveList.Add(poss[i]);
+                }
+                for (int i = 1; i < 8; i++)
+                {
+                    poss[i] = new ChessPosition(x, y + i);
+                    poss[i] = new ChessPosition(x - i, y);
+                    moveList.Add(poss[i]);
+                }
+                for (int i = 1; i < 8; i++)
+                {
+                    poss[i] = new ChessPosition(x, y + i);
+                    poss[i] = new ChessPosition(x + i, y);
+                    moveList.Add(poss[i]);
+                }
+                for (int i = 1; i < 8; i++)
+                {
+                    poss[i] = new ChessPosition(x, y - i);
+                    poss[i] = new ChessPosition(x - i, y);
+                    moveList.Add(poss[i]);
                 }
 
 
-            }
+                foreach (Figure figure in White)
+                {
+                    for (int i = 0; i < 8; i++)
+                    {
+                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            moveList.Remove(poss[i]);
+
+                        }
+                        if ((y == figure.y && x + i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 0;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 0;
+
+                        }
+                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 0;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 0;
+
+                        }
+                        if ((y == figure.y && x + i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 0;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 0;
+
+                        }
+                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 0;
+                        }
+                    }
+                }
+                foreach (Figure figure in Black)
+                {
+                    for (int i = 0; i < 8; i++)
+                    {
+                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 100;
+
+                        }
+                        if ((y == figure.y && x + i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 100;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 100;
+
+                        }
+                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 100;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 100;
+
+                        }
+                        if ((y == figure.y && x + i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 100;
+                        }
+                        /////////////////////////////////////////////
+                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
+                        {
+                            Score1 = 100;
+
+                        }
+                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
+                        {
+                            Score2 = 100;
+                        }
+                    }
+
+
+                }
 
             if (ChessColor == "BLACK")
             {
