@@ -16,6 +16,7 @@ namespace Cheees
             int x = 0;
             int y = 0;
             this.ChessColor = color;
+
         }
 
 
@@ -34,10 +35,9 @@ namespace Cheees
             if (ChessColor == "WHITE")
             {
                 ChessPosition y1 = new ChessPosition(x, y - 1);
-                ChessPosition y2 = new ChessPosition(x, y - 2);
 
                 moveList.Add(y1);
-                moveList.Add(y2);
+
 
 
 
@@ -49,22 +49,28 @@ namespace Cheees
                         moveList.Remove(y1);
 
                     }
-                    if ((y - 2 == figure.y && x == figure.x) || y - 2 < 0)
-                    {
-                        moveList.Remove(y2);
-                    }
                 }
 
                 foreach (Figure figure in Black)
                 {
                     if ((y - 1 == figure.y && x == figure.x) || y - 1 < 0)
                     {
-                        return moveList;
+                        moveList.Remove(y1);
 
                     }
-                    if ((y - 2 == figure.y && x == figure.x) || y - 2 < 0)
+                    if ((y - 1 == figure.y && x + 1 == figure.x) || y - 1 < 0)
                     {
-                        return moveList;
+                        ChessPosition Kill = new ChessPosition(x + 1, y - 1);
+                        List<ChessPosition> kill2 = new List<ChessPosition>();
+                        kill2.Add(Kill);
+                        return kill2;
+                    }
+                    if ((y - 1 == figure.y && x - 1 == figure.x) || y - 2 < 0)
+                    {
+                        ChessPosition Kill = new ChessPosition(x - 1, y - 1);
+                        List<ChessPosition> kill2 = new List<ChessPosition>();
+                        kill2.Add(Kill);
+                        return kill2;
                     }
 
 
@@ -75,35 +81,40 @@ namespace Cheees
             if (ChessColor == "BLACK")
             {
                 ChessPosition y1 = new ChessPosition(x, y + 1);
-                ChessPosition y2 = new ChessPosition(x, y + 2);
 
                 moveList.Add(y1);
-                moveList.Add(y2);
 
 
-                foreach (Figure figure in White)
+
+                foreach (Figure figure in Black)
                 {
                     if ((y + 1 == figure.y && x == figure.x) || y - 1 < 0)
                     {
                         return moveList;
 
                     }
-                    if ((y + 2 == figure.y && x == figure.x) || y - 2 < 0)
-                    {
-                        return moveList;
-                    }
                 }
 
-                foreach (Figure figure in Black)
+                foreach (Figure figure in White)
                 {
                     if ((y + 1 == figure.y && x == figure.x) || y - 1 < 0)
                     {
                         moveList.Remove(y1);
 
                     }
-                    if ((y + 2 == figure.y && x == figure.x) || y - 2 < 0)
+                    if ((y + 1 == figure.y && x + 1 == figure.x) || y - 1 < 0)
                     {
-                        moveList.Remove(y2);
+                        ChessPosition Kill = new ChessPosition(x + 1, y + 1);
+                        List<ChessPosition> kill2 = new List<ChessPosition>();
+                        kill2.Add(Kill);
+                        return kill2;
+                    }
+                    if (y + 1 == figure.y && x - 1 == figure.x)
+                    {
+                        ChessPosition Kill = new ChessPosition(x - 1, y + 1);
+                        List<ChessPosition> kill2 = new List<ChessPosition>();
+                        kill2.Add(Kill);
+                        return kill2;
                     }
                 }
             }
@@ -129,10 +140,10 @@ namespace Cheees
             if (ChessColor == "WHITE")
             {
                 ChessPosition y1 = new ChessPosition(x, y - 1);
-                ChessPosition y2 = new ChessPosition(x, y - 2);
+                
 
                 moveList.Add(y1);
-                moveList.Add(y2);
+                
                 if(y-1 < 0)
                 {
                     return 0;
@@ -145,10 +156,7 @@ namespace Cheees
                         Score1 = 0;
                         
                     }
-                    if ((y - 2 == figure.y && x == figure.x) || y - 2 < 0)
-                    {
-                        Score2 = 0;
-                    }
+                    
                 }
               /*  foreach (Figure figure in allFigure)
                 {
@@ -164,12 +172,12 @@ namespace Cheees
                 }*/
                 foreach (Figure figure in Black)
                 {
-                    if ((y - 1 == figure.y && x == figure.x) || y - 1 < 0)
+                    if ((y - 1 == figure.y && x + 1 == figure.x) || y - 1 < 0)
                     {
                         Score1 = 100;
 
                     }
-                    if ((y - 2 == figure.y && x == figure.x) || y - 2 < 0)
+                    if ((y - 1 == figure.y && x - 1 == figure.x) || y - 2 < 0)
                     {
                         Score2 = 100;
                     }
@@ -180,10 +188,9 @@ namespace Cheees
             if (ChessColor == "BLACK")
             {
                 ChessPosition y1 = new ChessPosition(x, y + 1);
-                ChessPosition y2 = new ChessPosition(x, y + 2);
+                
 
                 moveList.Add(y1);
-                moveList.Add(y2);
                 if (y + 1 > 8)
                 {
                     return 0;
@@ -191,12 +198,12 @@ namespace Cheees
 
                 foreach (Figure figure in White)
                 {
-                    if ((y + 1 == figure.y && x == figure.x) || y + 1 < 0)
+                    if ((y + 1 == figure.y && x + 1 == figure.x) || y - 1 < 0)
                     {
                         Score1 = 100;
 
                     }
-                    if ((y + 2 == figure.y && x == figure.x) || y + 2 < 0)
+                    if (y + 1 == figure.y && x - 1 == figure.x) 
                     {
                         Score2 = 100;
                     }
@@ -219,10 +226,6 @@ namespace Cheees
                     {
                         Score1 = 0;
 
-                    }
-                    if ((y + 2 == figure.y && x == figure.x) || y + 2 < 0)
-                    {
-                        Score2 = 0;
                     }
                 }
             }

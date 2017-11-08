@@ -162,7 +162,7 @@ namespace Cheees
 
                 for (int i = 0; i < CheeesWhite.Count; i++)
                 {
-                    if (CheeesWhite[i].x == CheeesBlack[CurrentChees].x && CheeesWhite[i].y == CheeesBlack[CurrentChees].y + 1)
+                    if (CheeesWhite[i].x == CheeesBlack[CurrentChees].x + 1 && CheeesWhite[i].y == CheeesBlack[CurrentChees].y + 1 || CheeesWhite[i].x == CheeesBlack[CurrentChees].x - 1 && CheeesWhite[i].y == CheeesBlack[CurrentChees].y + 1)
                     {
                         CheeesWhite.RemoveAt(i);
                     }
@@ -176,8 +176,7 @@ namespace Cheees
             }
             else
             {
-                DialogResult rezult = MessageBox.Show("Невозможно открыть выбранный файл",
-                        "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                updateBlack();
                 return;
             }
         }
@@ -204,7 +203,7 @@ namespace Cheees
 
                 for (int i = 0; i < CheeesBlack.Count; i++)
                 {
-                    if (CheeesBlack[i].x == CheeesWhite[CurrentChees].x && CheeesBlack[i].y == CheeesWhite[CurrentChees].y - 1)
+                    if (CheeesBlack[i].x == CheeesWhite[CurrentChees].x + 1 && CheeesBlack[i].y == CheeesWhite[CurrentChees].y - 1 || CheeesBlack[i].x == CheeesWhite[CurrentChees].x - 1 && CheeesBlack[i].y == CheeesWhite[CurrentChees].y - 1)
                     {
                         CheeesBlack.RemoveAt(i);
                     }
@@ -218,8 +217,7 @@ namespace Cheees
             }
             else
             {
-                DialogResult rezult = MessageBox.Show("Невозможно открыть выбранный файл",
-                        "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                updateWhite();
                 return;
             }
         }
