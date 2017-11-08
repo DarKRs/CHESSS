@@ -7,3 +7,12 @@ C:\GitHub\jom\Cheeeeees\Cheees\Cheees\obj\Debug\Cheees.Properties.Resources.reso
 C:\GitHub\jom\Cheeeeees\Cheees\Cheees\obj\Debug\Cheees.csproj.GenerateResource.Cache
 C:\GitHub\jom\Cheeeeees\Cheees\Cheees\obj\Debug\Cheees.exe
 C:\GitHub\jom\Cheeeeees\Cheees\Cheees\obj\Debug\Cheees.pdb
+C:\GitHub\jom\Cheeeeees\Cheees\CHESSS\Cheees\bin\Debug\Cheees.exe.config
+C:\GitHub\jom\Cheeeeees\Cheees\CHESSS\Cheees\obj\Debug\Cheees.exe
+C:\GitHub\jom\Cheeeeees\Cheees\CHESSS\Cheees\obj\Debug\Cheees.pdb
+C:\GitHub\jom\Cheeeeees\Cheees\CHESSS\Cheees\bin\Debug\Cheees.exe
+C:\GitHub\jom\Cheeeeees\Cheees\CHESSS\Cheees\bin\Debug\Cheees.pdb
+C:\GitHub\jom\Cheeeeees\Cheees\CHESSS\Cheees\obj\Debug\Cheees.csprojResolveAssemblyReference.cache
+C:\GitHub\jom\Cheeeeees\Cheees\CHESSS\Cheees\obj\Debug\Cheees.Form1.resources
+C:\GitHub\jom\Cheeeeees\Cheees\CHESSS\Cheees\obj\Debug\Cheees.Properties.Resources.resources
+C:\GitHub\jom\Cheeeeees\Cheees\CHESSS\Cheees\obj\Debug\Cheees.csproj.GenerateResource.Cache

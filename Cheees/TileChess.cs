@@ -16,7 +16,7 @@ namespace Cheees
         public void draw(Graphics g, string color)
         {
             
-            if (color == "BLACK") { g.FillRectangle(Brushes.Black, xReal, yReal, 60, 60); }
+            if (color == "BLACK") { g.FillRectangle(Brushes.DarkCyan, xReal, yReal, 60, 60); }
             if (color == "WHITE") { g.FillRectangle(Brushes.White, xReal, yReal, 60, 60); }
         }
 
