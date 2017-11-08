@@ -143,10 +143,12 @@ namespace Cheees
             if(FlagHod == false)
             {
                 updateWhite();
+                return;
             }
             if (FlagHod == true)
             {
                 updateBlack();
+                return;
             }
         }
 
