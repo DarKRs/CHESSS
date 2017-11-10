@@ -12,6 +12,7 @@ namespace Cheees
     {
         public int x;
         public int y;
+        public int Price;
         public string ChessColor;
         public string local = Directory.GetCurrentDirectory();
 
@@ -21,5 +22,6 @@ namespace Cheees
 
         public abstract void draw(Graphics g, int x, int y, string ChessColor);
         public abstract void update();
+
     }
 }

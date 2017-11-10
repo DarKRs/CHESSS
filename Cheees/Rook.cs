@@ -15,6 +15,7 @@ namespace Cheees
             int x = 0;
             int y = 0;
             this.ChessColor = color;
+            Price = 150;
         }
 
         override public int AlpBet(ChessBoard chessBoard)
@@ -33,201 +34,228 @@ namespace Cheees
 
             if (ChessColor == "WHITE")
             {
-                ChessPosition[] poss = new ChessPosition[16];
-                for (int i = 1; i < 8; i++)
-                {
-                    poss[i] = new ChessPosition(x, y - i);
-                    poss[i] = new ChessPosition(x + i, y);
-                    moveList.Add(poss[i]);
-                }
-                for (int i = 1; i < 8; i++)
-                {
-                    poss[i] = new ChessPosition(x, y + i);
-                    poss[i] = new ChessPosition(x - i, y);
-                    moveList.Add(poss[i]);
-                }
-                for (int i = 1; i < 8; i++)
-                {
-                    poss[i] = new ChessPosition(x, y + i);
-                    poss[i] = new ChessPosition(x + i, y);
-                    moveList.Add(poss[i]);
-                }
-                for (int i = 1; i < 8; i++)
-                {
-                    poss[i] = new ChessPosition(x, y - i);
-                    poss[i] = new ChessPosition(x - i, y);
-                    moveList.Add(poss[i]);
-                }
+                ChessPosition[] possXP = new ChessPosition[8];
+                ChessPosition[] possYP = new ChessPosition[8];
+                ChessPosition[] possXM = new ChessPosition[8];
+                ChessPosition[] possYM = new ChessPosition[8];
+                bool FoundXP = false;
+                bool FoundYP = false;
+                bool FoundXM = false;
+                bool FoundYM = false;
 
-
-                foreach (Figure figure in White)
+                ////////////////////////X PLUS////////////////////////
+                for (int i = 1; i < 8; i++)
                 {
-                    for (int i = 0; i < 8; i++)
+                    if (!FoundXP)
                     {
-                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
+                        possXP[i] = new ChessPosition(x + 1, y);
+                        foreach (Figure figure in Black)
                         {
-                            Score1 = 0;
-
+                            if (possXP[i].x == figure.x && possXP[i].y == figure.y)
+                            {
+                                FoundXP = true;
+                                Score1 = 100 + figure.Price;
+                                break;
+                            }
                         }
-                        if ((y == figure.y && x + i  == figure.x) || y - 2 < 0)
+                        foreach (Figure figure in White)
                         {
-                            Score2 = 0;
-                        }
-                        /////////////////////////////////////////////
-                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
-                        {
-                            Score1 = 0;
-
-                        }
-                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
-                        {
-                            Score2 = 0;
-                        }
-                        /////////////////////////////////////////////
-                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
-                        {
-                            Score1 = 0;
-
-                        }
-                        if ((y == figure.y && x + i == figure.x) || y - 2 < 0)
-                        {
-                            Score2 = 0;
-                        }
-                        /////////////////////////////////////////////
-                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
-                        {
-                            Score1 = 0;
-
-                        }
-                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
-                        {
-                            Score2 = 0;
+                            if ((possXP[i].x + 1 == figure.x && possXP[i].y == figure.y) || (possXP[i].x + 1 > 8))
+                            {
+                                FoundXP = true;
+                                break;
+                            }
                         }
                     }
                 }
-                foreach (Figure figure in Black)
+                /////////////////////////////////////////Y PLUS//////////////////////////////////////
+                for (int i = 1; i < 8; i++)
                 {
-                    for (int i = 0; i < 8; i++)
+                    if (!FoundYP)
                     {
-                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
+                        possYP[i] = new ChessPosition(x, y + 1);
+                        foreach (Figure figure in Black)
                         {
-                            Score1 = 100;
-
+                            if (possYP[i].x == figure.x && possYP[i].y == figure.y)
+                            {
+                                FoundYP = true;
+                                Score1 = 100 + figure.Price;
+                                break;
+                            }
                         }
-                        if ((y == figure.y && x + i == figure.x) || y - 2 < 0)
+                        foreach (Figure figure in White)
                         {
-                            Score2 = 100;
-                        }
-                        /////////////////////////////////////////////
-                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
-                        {
-                            Score1 = 100;
-
-                        }
-                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
-                        {
-                            Score2 = 100;
-                        }
-                        /////////////////////////////////////////////
-                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
-                        {
-                            Score1 = 100;
-
-                        }
-                        if ((y == figure.y && x + i == figure.x) || y - 2 < 0)
-                        {
-                            Score2 = 100;
-                        }
-                        /////////////////////////////////////////////
-                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
-                        {
-                            Score1 = 100;
-
-                        }
-                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
-                        {
-                            Score2 = 100;
+                            if ((possYP[i].x == figure.x && possYP[i].y + 1 == figure.y) || (possYP[i].y + 1 > 8))
+                            {
+                                FoundYP = true;
+                                break;
+                            }
                         }
                     }
                 }
-                foreach (Figure figure in allFigure)
+                //////////////////////////////////////X MINUS///////////////////////////////
+                for (int i = 1; i < 8; i++)
                 {
-                    for (int i = 0; i < 8; i++)
+                    if (!FoundXM)
                     {
-                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
+                        possXM[i] = new ChessPosition(x - 1, y);
+                        foreach (Figure figure in Black)
                         {
-                            Score1 = 50;
-
+                            if (possXM[i].x == figure.x && possXM[i].y == figure.y)
+                            {
+                                FoundXM = true;
+                                Score1 = 100 + figure.Price;
+                                break;
+                            }
                         }
-                        if ((y == figure.y && x + i == figure.x) || y - 2 < 0)
+                        foreach (Figure figure in White)
                         {
-                            Score2 = 50;
-                        }
-                        /////////////////////////////////////////////
-                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
-                        {
-                            Score1 = 50;
-
-                        }
-                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
-                        {
-                            Score2 = 50;
-                        }
-                        /////////////////////////////////////////////
-                        if ((y + i == figure.y && x == figure.x) || y - 1 < 0)
-                        {
-                            Score1 = 50;
-
-                        }
-                        if ((y == figure.y && x + i == figure.x) || y - 2 < 0)
-                        {
-                            Score2 = 50;
-                        }
-                        /////////////////////////////////////////////
-                        if ((y - i == figure.y && x == figure.x) || y - 1 < 0)
-                        {
-                            Score1 = 50;
-
-                        }
-                        if ((y == figure.y && x - i == figure.x) || y - 2 < 0)
-                        {
-                            Score2 = 50;
+                            if ((possXM[i].x - 1 == figure.x && possXM[i].y == figure.y) || (possXM[i].x - 1 < 0))
+                            {
+                                FoundXM = true;
+                                break;
+                            }
                         }
                     }
                 }
-
+                ////////////////////////////////////////Y MINUS//////////////////////////////////////////////////
+                for (int i = 1; i < 8; i++)
+                {
+                    if (!FoundYM)
+                    {
+                        possYM[i] = new ChessPosition(x, y - 1);
+                        foreach (Figure figure in Black)
+                        {
+                            if (possYM[i].x == figure.x && possYM[i].y == figure.y)
+                            {
+                                FoundYM = true;
+                                Score1 = 100 + figure.Price;
+                                break;
+                            }
+                        }
+                        foreach (Figure figure in White)
+                        {
+                            if ((possYM[i].x - 1 == figure.x && possYM[i].y == figure.y) || (possYM[i].y - 1 < 0))
+                            {
+                                FoundYM = true;
+                                break;
+                            }
+                        }
+                    }
+                }
             }
             if (ChessColor == "BLACK")
             {
-                ChessPosition y1 = new ChessPosition(x, y + 1);
-                ChessPosition y2 = new ChessPosition(x, y + 2);
+                ChessPosition[] possXP = new ChessPosition[8];
+                ChessPosition[] possYP = new ChessPosition[8];
+                ChessPosition[] possXM = new ChessPosition[8];
+                ChessPosition[] possYM = new ChessPosition[8];
+                bool FoundXP = false;
+                bool FoundYP = false;
+                bool FoundXM = false;
+                bool FoundYM = false;
 
-                moveList.Add(y1);
-                moveList.Add(y2);
-
-
-                foreach (Figure figure in allFigure)
+                ////////////////////////X PLUS////////////////////////
+                for (int i = 1; i < 8; i++)
                 {
-                    if ((y + 1 == figure.y && x == figure.x) || y + 1 < 0)
+                    if (!FoundXP)
                     {
-                        moveList.Remove(y1);
-
+                        possXP[i] = new ChessPosition(x + 1, y);
+                        foreach (Figure figure in White)
+                        {
+                            if (possXP[i].x == figure.x && possXP[i].y == figure.y)
+                            {
+                                FoundXP = true;
+                                Score1 = 100 + figure.Price;
+                                break;
+                            }
+                        }
+                        foreach (Figure figure in Black)
+                        {
+                            if ((possXP[i].x + 1 == figure.x && possXP[i].y == figure.y) || (possXP[i].x + 1 > 8))
+                            {
+                                FoundXP = true;
+                                break;
+                            }
+                        }
                     }
-                    if ((y + 2 == figure.y && x == figure.x) || y + 2 < 0)
+                }
+                /////////////////////////////////////////Y PLUS//////////////////////////////////////
+                for (int i = 1; i < 8; i++)
+                {
+                    if (!FoundYP)
                     {
-                        moveList.Remove(y2);
+                        possYP[i] = new ChessPosition(x, y + 1);
+                        foreach (Figure figure in White)
+                        {
+                            if (possYP[i].x == figure.x && possYP[i].y == figure.y)
+                            {
+                                FoundYP = true;
+                                Score1 = 100 + figure.Price;
+                                break;
+                            }
+                        }
+                        foreach (Figure figure in Black)
+                        {
+                            if ((possYP[i].x == figure.x && possYP[i].y + 1 == figure.y) || (possYP[i].y + 1 > 8))
+                            {
+                                FoundYP = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                //////////////////////////////////////X MINUS///////////////////////////////
+                for (int i = 1; i < 8; i++)
+                {
+                    if (!FoundXM)
+                    {
+                        possXM[i] = new ChessPosition(x - 1, y);
+                        foreach (Figure figure in White)
+                        {
+                            if (possXM[i].x == figure.x && possXM[i].y == figure.y)
+                            {
+                                FoundXM = true;
+                                Score1 = 100 + figure.Price;
+                                break;
+                            }
+                        }
+                        foreach (Figure figure in Black)
+                        {
+                            if ((possXM[i].x - 1 == figure.x && possXM[i].y == figure.y) || (possXM[i].x - 1 < 0))
+                            {
+                                FoundXM = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                ////////////////////////////////////////Y MINUS//////////////////////////////////////////////////
+                for (int i = 1; i < 8; i++)
+                {
+                    if (!FoundYM)
+                    {
+                        possYM[i] = new ChessPosition(x, y - 1);
+                        foreach (Figure figure in White)
+                        {
+                            if (possYM[i].x == figure.x && possYM[i].y == figure.y)
+                            {
+                                FoundYM = true;
+                                Score1 = 100 + figure.Price;
+                                break;
+                            }
+                        }
+                        foreach (Figure figure in Black)
+                        {
+                            if ((possYM[i].x - 1 == figure.x && possYM[i].y == figure.y) || (possYM[i].y - 1 < 0))
+                            {
+                                FoundYM = true;
+                                break;
+                            }
+                        }
                     }
                 }
             }
-            if (Score1 > Score2)
-            {
-                return Score1;
-            }
-            if (Score2 > Score1)
-            {
-                return Score2;
-            }
-
             return Score1;
 
         }
@@ -246,8 +274,244 @@ namespace Cheees
 
             if (ChessColor == "WHITE")
             {
-                
-                
+                ChessPosition[] possXP = new ChessPosition[8];
+                ChessPosition[] possYP = new ChessPosition[8];
+                ChessPosition[] possXM = new ChessPosition[8];
+                ChessPosition[] possYM = new ChessPosition[8];
+                bool FoundXP = false;
+                bool FoundYP = false;
+                bool FoundXM = false;
+                bool FoundYM = false;
+
+                ////////////////////////X PLUS////////////////////////
+                for (int i = 1; i < 8; i++)
+                {
+                    if (!FoundXP)
+                    {
+                        possXP[i] = new ChessPosition(x + 1, y);
+                        moveList.Add(possXP[i]);
+                        foreach (Figure figure in Black)
+                        {
+                            if (possXP[i].x == figure.x && possXP[i].y == figure.y)
+                            {
+                                FoundXP = true;
+                                possXP[i].PriceTile = 100 + figure.Price;
+                                moveList.Add(possXP[i]);
+                                return moveList;
+
+                            }
+                        }
+                        foreach (Figure figure in White)
+                        {
+                            if ((possXP[i].x + 1 == figure.x && possXP[i].y == figure.y) || (possXP[i].x + 1 > 8))
+                            {
+                                FoundXP = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                /////////////////////////////////////////Y PLUS//////////////////////////////////////
+                for (int i = 1; i < 8; i++)
+                {
+                    if (!FoundYP)
+                    {
+                        possYP[i] = new ChessPosition(x, y + 1);
+                        moveList.Add(possYP[i]);
+                        foreach (Figure figure in Black)
+                        {
+                            if (possYP[i].x == figure.x && possYP[i].y == figure.y)
+                            {
+                                FoundYP = true;
+                                possYP[i].PriceTile = 100 + figure.Price;
+                                moveList.Add(possYP[i]);
+                                return moveList;
+                            }
+                        }
+                        foreach (Figure figure in White)
+                        {
+                            if ((possYP[i].x == figure.x && possYP[i].y + 1 == figure.y) || (possYP[i].y + 1 > 8))
+                            {
+                                FoundYP = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                //////////////////////////////////////X MINUS///////////////////////////////
+                for (int i = 1; i < 8; i++)
+                {
+                    if (!FoundXM)
+                    {
+                        possXM[i] = new ChessPosition(x - 1, y);
+                        moveList.Add(possXM[i]);
+                        foreach (Figure figure in Black)
+                        {
+                            if (possXM[i].x == figure.x && possXM[i].y == figure.y)
+                            {
+                                FoundXM = true;
+                                possXM[i].PriceTile = 100 + figure.Price;
+                                moveList.Add(possXM[i]);
+                                return moveList;
+                            }
+                        }
+                        foreach (Figure figure in White)
+                        {
+                            if ((possXM[i].x - 1 == figure.x && possXM[i].y == figure.y) || (possXM[i].x - 1 < 0))
+                            {
+                                FoundXM = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                ////////////////////////////////////////Y MINUS//////////////////////////////////////////////////
+                for (int i = 1; i < 8; i++)
+                {
+                    if (!FoundYM)
+                    {
+                        possYM[i] = new ChessPosition(x, y - 1);
+                        moveList.Add(possYM[i]);
+                        foreach (Figure figure in Black)
+                        {
+                            if (possYM[i].x == figure.x && possYM[i].y == figure.y)
+                            {
+                                FoundYM = true;
+                                possYM[i].PriceTile = 100 + figure.Price;
+                                moveList.Add(possYM[i]);
+                                return moveList;
+                            }
+                        }
+                        foreach (Figure figure in White)
+                        {
+                            if ((possYM[i].x - 1 == figure.x && possYM[i].y == figure.y) || (possYM[i].y - 1 < 0))
+                            {
+                                FoundYM = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            if (ChessColor == "BLACK")
+            {
+                ChessPosition[] possXP = new ChessPosition[8];
+                ChessPosition[] possYP = new ChessPosition[8];
+                ChessPosition[] possXM = new ChessPosition[8];
+                ChessPosition[] possYM = new ChessPosition[8];
+                bool FoundXP = false;
+                bool FoundYP = false;
+                bool FoundXM = false;
+                bool FoundYM = false;
+
+                ////////////////////////X PLUS////////////////////////
+                for (int i = 1; i < 8; i++)
+                {
+                    if (!FoundXP)
+                    {
+                        possXP[i] = new ChessPosition(x + 1, y);
+                        moveList.Add(possXP[i]);
+                        foreach (Figure figure in White)
+                        {
+                            if (possXP[i].x == figure.x && possXP[i].y == figure.y)
+                            {
+                                FoundXP = true;
+                                possXP[i].PriceTile = 100 + figure.Price;
+                                moveList.Add(possXP[i]);
+                                return moveList;
+                            }
+                        }
+                        foreach (Figure figure in Black)
+                        {
+                            if ((possXP[i].x + 1 == figure.x && possXP[i].y == figure.y) || (possXP[i].x + 1 > 8))
+                            {
+                                FoundXP = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                /////////////////////////////////////////Y PLUS//////////////////////////////////////
+                for (int i = 1; i < 8; i++)
+                {
+                    if (!FoundYP)
+                    {
+                        possYP[i] = new ChessPosition(x, y + 1);
+                        moveList.Add(possYP[i]);
+                        foreach (Figure figure in White)
+                        {
+                            if (possYP[i].x == figure.x && possYP[i].y == figure.y)
+                            {
+                                FoundYP = true;
+                                possYP[i].PriceTile = 100 + figure.Price;
+                                moveList.Add(possYP[i]);
+                                return moveList;
+                            }
+                        }
+                        foreach (Figure figure in Black)
+                        {
+                            if ((possYP[i].x == figure.x && possYP[i].y + 1 == figure.y) || (possYP[i].y + 1 > 8))
+                            {
+                                FoundYP = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                //////////////////////////////////////X MINUS///////////////////////////////
+                for (int i = 1; i < 8; i++)
+                {
+                    if (!FoundXM)
+                    {
+                        possXM[i] = new ChessPosition(x - 1, y);
+                        moveList.Add(possXM[i]);
+                        foreach (Figure figure in White)
+                        {
+                            if (possXM[i].x == figure.x && possXM[i].y == figure.y)
+                            {
+                                FoundXM = true;
+                                possXM[i].PriceTile = 100 + figure.Price;
+                                moveList.Add(possXM[i]);
+                                return moveList;
+                            }
+                        }
+                        foreach (Figure figure in Black)
+                        {
+                            if ((possXM[i].x - 1 == figure.x && possXM[i].y == figure.y) || (possXM[i].x - 1 < 0))
+                            {
+                                FoundXM = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                ////////////////////////////////////////Y MINUS//////////////////////////////////////////////////
+                for (int i = 1; i < 8; i++)
+                {
+                    if (!FoundYM)
+                    {
+                        possYM[i] = new ChessPosition(x, y - 1);
+                        moveList.Add(possYM[i]);
+                        foreach (Figure figure in White)
+                        {
+                            if (possYM[i].x == figure.x && possYM[i].y == figure.y)
+                            {
+                                FoundYM = true;
+                                possYM[i].PriceTile = 100 + figure.Price;
+                                moveList.Add(possYM[i]);
+                                return moveList;
+                            }
+                        }
+                        foreach (Figure figure in Black)
+                        {
+                            if ((possYM[i].x - 1 == figure.x && possYM[i].y == figure.y) || (possYM[i].y - 1 < 0))
+                            {
+                                FoundYM = true;
+                                break;
+                            }
+                        }
+                    }
+                }
             }
             return moveList;
         }

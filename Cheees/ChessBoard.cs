@@ -142,7 +142,7 @@ namespace Cheees
 
         public void updateBlack()
         {
-            int rand = rnd.Next(1);
+           
             int ChessRand = rnd.Next(8);
             int CurrentChees = 0;
             int buffer = 0;
@@ -159,7 +159,11 @@ namespace Cheees
             moveList = CheeesBlack[CurrentChees].move(this);
             if (moveList.Count != 0)
             {
-
+                int buf = 0;
+                for(int i = 1; i < moveList.Count; i++)
+                {
+                    if(moveList[i].PriceTile > moveList[i-1].PriceTile) { buf = i; }
+                }
                 for (int i = 0; i < CheeesWhite.Count; i++)
                 {
                     if (CheeesWhite[i].x == CheeesBlack[CurrentChees].x + 1 && CheeesWhite[i].y == CheeesBlack[CurrentChees].y + 1 || CheeesWhite[i].x == CheeesBlack[CurrentChees].x - 1 && CheeesWhite[i].y == CheeesBlack[CurrentChees].y + 1)
@@ -167,9 +171,8 @@ namespace Cheees
                         CheeesWhite.RemoveAt(i);
                     }
                 }
-
-                CheeesBlack[CurrentChees].x = moveList[rand].x;
-                CheeesBlack[CurrentChees].y = moveList[rand].y;
+                CheeesBlack[CurrentChees].x = moveList[buf].x;
+                CheeesBlack[CurrentChees].y = moveList[buf].y;
                 Console.Out.Write("Черная пешка # " + CurrentChees + " ходит на координаты " + " X:" + moveList[0].x + " Y:" + moveList[0].y);
                 draw();
                 update();
@@ -183,7 +186,6 @@ namespace Cheees
 
         public void updateWhite()
         {
-            int rand = rnd.Next(1);
             int ChessRand = rnd.Next(8);
             int CurrentChees = 0;
             int buffer = 0;
@@ -200,7 +202,11 @@ namespace Cheees
             moveList = CheeesWhite[CurrentChees].move(this);
             if (moveList.Count != 0)
             {
-
+                int buf = 0;
+                for (int i = 1; i < moveList.Count; i++)
+                {
+                    if (moveList[i].PriceTile > moveList[i - 1].PriceTile) { buf = i; }
+                }
                 for (int i = 0; i < CheeesBlack.Count; i++)
                 {
                     if (CheeesBlack[i].x == CheeesWhite[CurrentChees].x + 1 && CheeesBlack[i].y == CheeesWhite[CurrentChees].y - 1 || CheeesBlack[i].x == CheeesWhite[CurrentChees].x - 1 && CheeesBlack[i].y == CheeesWhite[CurrentChees].y - 1)
@@ -209,8 +215,8 @@ namespace Cheees
                     }
                 }
 
-                CheeesWhite[CurrentChees].x = moveList[rand].x;
-                CheeesWhite[CurrentChees].y = moveList[rand].y;
+                CheeesWhite[CurrentChees].x = moveList[buf].x;
+                CheeesWhite[CurrentChees].y = moveList[buf].y;
                 Console.Out.Write("Белая пешка # " + CurrentChees + " ходит на координаты " + " X:" + moveList[0].x + " Y:" + moveList[0].y);
                 draw();
                 update();

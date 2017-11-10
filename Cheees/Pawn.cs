@@ -16,7 +16,7 @@ namespace Cheees
             int x = 0;
             int y = 0;
             this.ChessColor = color;
-
+            Price = 100;
         }
 
 
@@ -37,11 +37,6 @@ namespace Cheees
                 ChessPosition y1 = new ChessPosition(x, y - 1);
 
                 moveList.Add(y1);
-
-
-
-
-
                 foreach (Figure figure in White)
                 {
                     if ((y - 1 == figure.y && x == figure.x) || y - 1 < 0)
@@ -61,6 +56,7 @@ namespace Cheees
                     if ((y - 1 == figure.y && x + 1 == figure.x) || y - 1 < 0)
                     {
                         ChessPosition Kill = new ChessPosition(x + 1, y - 1);
+                        Kill.PriceTile = 100 + figure.Price;
                         List<ChessPosition> kill2 = new List<ChessPosition>();
                         kill2.Add(Kill);
                         return kill2;
@@ -68,6 +64,7 @@ namespace Cheees
                     if ((y - 1 == figure.y && x - 1 == figure.x) || y - 2 < 0)
                     {
                         ChessPosition Kill = new ChessPosition(x - 1, y - 1);
+                        Kill.PriceTile = 100 + figure.Price;
                         List<ChessPosition> kill2 = new List<ChessPosition>();
                         kill2.Add(Kill);
                         return kill2;
@@ -84,7 +81,10 @@ namespace Cheees
 
                 moveList.Add(y1);
 
-
+                if (y + 1 > 8)
+                {
+                    moveList.Remove(y1);
+                }
 
                 foreach (Figure figure in Black)
                 {
@@ -105,6 +105,7 @@ namespace Cheees
                     if ((y + 1 == figure.y && x + 1 == figure.x) || y - 1 < 0)
                     {
                         ChessPosition Kill = new ChessPosition(x + 1, y + 1);
+                        Kill.PriceTile = 100 + figure.Price;
                         List<ChessPosition> kill2 = new List<ChessPosition>();
                         kill2.Add(Kill);
                         return kill2;
@@ -112,6 +113,7 @@ namespace Cheees
                     if (y + 1 == figure.y && x - 1 == figure.x)
                     {
                         ChessPosition Kill = new ChessPosition(x - 1, y + 1);
+                        Kill.PriceTile = 100 + figure.Price;
                         List<ChessPosition> kill2 = new List<ChessPosition>();
                         kill2.Add(Kill);
                         return kill2;
@@ -158,28 +160,17 @@ namespace Cheees
                     }
                     
                 }
-              /*  foreach (Figure figure in allFigure)
-                {
-                    if ((y - 1 != figure.y && x != figure.x) || y - 1 < 0)
-                    {
-                        Score1 = 50;
-
-                    }
-                    if ((y - 2 != figure.y && x != figure.x) || y - 2 < 0)
-                    {
-                        Score2 = 50;
-                    }
-                }*/
+   
                 foreach (Figure figure in Black)
                 {
                     if ((y - 1 == figure.y && x + 1 == figure.x) || y - 1 < 0)
                     {
-                        Score1 = 100;
+                        Score1 = 100 + figure.Price; 
 
                     }
                     if ((y - 1 == figure.y && x - 1 == figure.x) || y - 2 < 0)
                     {
-                        Score2 = 100;
+                        Score2 = 100 + figure.Price; 
                     }
                 }
                 
@@ -188,8 +179,6 @@ namespace Cheees
             if (ChessColor == "BLACK")
             {
                 ChessPosition y1 = new ChessPosition(x, y + 1);
-                
-
                 moveList.Add(y1);
                 if (y + 1 > 8)
                 {
@@ -198,31 +187,19 @@ namespace Cheees
 
                 foreach (Figure figure in White)
                 {
-                    if ((y + 1 == figure.y && x + 1 == figure.x) || y - 1 < 0)
+                    if (y + 1 == figure.y && x + 1 == figure.x)
                     {
-                        Score1 = 100;
+                        Score1 = 100 + figure.Price;
 
                     }
                     if (y + 1 == figure.y && x - 1 == figure.x) 
                     {
-                        Score2 = 100;
+                        Score2 = 100 + figure.Price; ;
                     }
                 }
-                /*  foreach (Figure figure in allFigure)
-                  {
-                      if ((y - 1 != figure.y && x != figure.x) || y - 1 < 0)
-                      {
-                          Score1 = 50;
-
-                      }
-                      if ((y - 2 != figure.y && x != figure.x) || y - 2 < 0)
-                      {
-                          Score2 = 50;
-                      }
-                  }*/
                 foreach (Figure figure in Black)
                 {
-                    if ((y + 1 == figure.y && x == figure.x) || y + 1 < 0)
+                    if (y + 1 == figure.y && x == figure.x)
                     {
                         Score1 = 0;
 
@@ -262,10 +239,6 @@ namespace Cheees
             }
         }
 
-        /*public override List<ChessPosition> move(ChessBoard chessBoard)
-        {
-            throw new NotImplementedException();
-        }*/
 
         public override void update()
         {

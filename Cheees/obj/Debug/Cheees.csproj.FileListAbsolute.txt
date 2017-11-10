@@ -16,3 +16,12 @@ C:\GitHub\jom\Cheeeeees\Cheees\CHESSS\Cheees\obj\Debug\Cheees.csprojResolveAssem
 C:\GitHub\jom\Cheeeeees\Cheees\CHESSS\Cheees\obj\Debug\Cheees.Form1.resources
 C:\GitHub\jom\Cheeeeees\Cheees\CHESSS\Cheees\obj\Debug\Cheees.Properties.Resources.resources
 C:\GitHub\jom\Cheeeeees\Cheees\CHESSS\Cheees\obj\Debug\Cheees.csproj.GenerateResource.Cache
+C:\Users\Admin\Desktop\CHESSS-master\Cheees\bin\Debug\Cheees.exe.config
+C:\Users\Admin\Desktop\CHESSS-master\Cheees\obj\Debug\Cheees.exe
+C:\Users\Admin\Desktop\CHESSS-master\Cheees\obj\Debug\Cheees.pdb
+C:\Users\Admin\Desktop\CHESSS-master\Cheees\bin\Debug\Cheees.exe
+C:\Users\Admin\Desktop\CHESSS-master\Cheees\bin\Debug\Cheees.pdb
+C:\Users\Admin\Desktop\CHESSS-master\Cheees\obj\Debug\Cheees.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\CHESSS-master\Cheees\obj\Debug\Cheees.Form1.resources
+C:\Users\Admin\Desktop\CHESSS-master\Cheees\obj\Debug\Cheees.Properties.Resources.resources
+C:\Users\Admin\Desktop\CHESSS-master\Cheees\obj\Debug\Cheees.csproj.GenerateResource.Cache

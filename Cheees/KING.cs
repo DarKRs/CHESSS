@@ -15,6 +15,7 @@ namespace Cheees
             int x = 0;
             int y = 0;
             this.ChessColor = color;
+            Price = 999;
         }
 
         override public int AlpBet(ChessBoard chessBoard)
@@ -194,6 +195,8 @@ namespace Cheees
                 g.DrawImage(img, new Point(x, y));
             }
         }
+
+
 
         public override void update()
         {

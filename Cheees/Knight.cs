@@ -15,6 +15,7 @@ namespace Cheees
             int x = 0;
             int y = 0;
             this.ChessColor = color;
+            Price = 200;
         }
 
         override public int AlpBet(ChessBoard chessBoard)
