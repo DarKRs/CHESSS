@@ -114,7 +114,7 @@ namespace Cheees
 
         }
 
-        override public List<ChessPosition> move(ChessBoard chessBoard)
+        override public ChessPosition move(ChessBoard chessBoard)
         {
             int Score = 0;
             int Best_Score = Score;
@@ -194,13 +194,6 @@ namespace Cheees
                 Image img = Image.FromFile(path);
                 g.DrawImage(img, new Point(x, y));
             }
-        }
-
-
-
-        public override void update()
-        {
-            throw new NotImplementedException();
         }
     }
 }

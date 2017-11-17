@@ -11,6 +11,7 @@ namespace Cheees
     {
         public int xReal, yReal;
         public int x,y;
+        public Figure currentFigure = null;
 
 
         public void draw(Graphics g, string color)

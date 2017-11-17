@@ -13,7 +13,7 @@ namespace Cheees
         Graphics g;
 
         Random rnd = new Random();
-        TileChess[,] chessTiles;
+        public TileChess[,] chessTiles;
        
         public List<Pawn> pawnsWhite;
         public List<Pawn> pawnsBlack;
@@ -227,61 +227,6 @@ namespace Cheees
                 return;
             }
         }
-            /*for (int i = 0; i < figuresWhite.size(); i++)
-            {
-                //moveList.addAll(figuresWhite.get(i).move(this));
-                for (int j = 0; j < figuresBlack.size(); j++)
-                {
-                    /*if (figuresWhite.get(i).y - 1 == figuresBlack.get(j).y || figuresWhite.get(i).y - 2 == figuresBlack.get(j).y){
-                        figuresWhite.get(i).y = figuresBlack.get(j).y;
-                    }
-                    if (figuresWhite.get(i).y == figuresBlack.get(j).y && figuresWhite.get(i).x == figuresBlack.get(j).x){
-                        figuresBlack.remove(j);
-                    }
-                }
-            }
-            for (ChessPosition chessPosition : moveList)
-            {
-                System.out.println(chessPosition.x + " : " + chessPosition.y);
-            }
-            System.out.println("---------------------------------");
-            moveList.clear();
-        }
-
-        public void updateBlack()
-        {
-
-            int randNum = (int)(Math.random() * figuresBlack.size());
-
-            moveList = figuresBlack.get(randNum).move(this);
-            if (moveList.size() != 0)
-            {
-                int randI = (int)(Math.random() * moveList.size());
-                figuresBlack.get(randNum).y = moveList.get(randI).y;
-            }
-
-            for (int i = 0; i < figuresBlack.size(); i++)
-            {
-                for (int j = 0; j < figuresWhite.size(); j++)
-                {
-                    /* if (figuresBlack.get(i).y + 1 == figuresWhite.get(j).y || figuresBlack.get(i).y + 2 == figuresWhite.get(j).y){
-                         figuresBlack.get(i).y = figuresWhite.get(j).y;
-                     }
-                     if (figuresBlack.get(i).y == figuresWhite.get(j).y && figuresBlack.get(i).x == figuresWhite.get(j).x){
-                         figuresWhite.remove(j);
-                     }
-                }
-            }
-            for (ChessPosition chessPosition : moveList)
-            {
-
-                System.out.println(chessPosition.x + " : " + chessPosition.y);
-            }
-            System.out.println("---------------------------------");
-            // moveList.clear();
-        }*/
-        
-
 
         public void draw()
         {
@@ -303,11 +248,13 @@ namespace Cheees
             for(int i=0; i < CheeesBlack.Count; i++)
             {
                 chessTiles[CheeesBlack[i].x, CheeesBlack[i].y].drawFigure(g, CheeesBlack[i]);
+                chessTiles[CheeesBlack[i].x, CheeesBlack[i].y].currentFigure = CheeesBlack[i];
             }
 
             for (int i = 0; i < CheeesWhite.Count; i++)
             {
                 chessTiles[CheeesWhite[i].x, CheeesWhite[i].y].drawFigure(g, CheeesWhite[i]);
+                chessTiles[CheeesWhite[i].x, CheeesWhite[i].y].currentFigure = CheeesWhite[i];
             }
 
        
@@ -318,11 +265,14 @@ namespace Cheees
             for (int i = 0; i < CheeesBlack.Count; i++)
             {
                 chessTiles[CheeesBlack[i].x, CheeesBlack[i].y].drawFigure(g, CheeesBlack[i]);
+                chessTiles[CheeesBlack[i].x, CheeesBlack[i].y].currentFigure = CheeesBlack[i];
+
             }
 
             for (int i = 0; i < CheeesWhite.Count; i++)
             {
                 chessTiles[CheeesWhite[i].x, CheeesWhite[i].y].drawFigure(g, CheeesWhite[i]);
+                chessTiles[CheeesWhite[i].x, CheeesWhite[i].y].currentFigure = CheeesWhite[i];
             }
         }
     }

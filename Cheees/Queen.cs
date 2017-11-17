@@ -114,7 +114,7 @@ namespace Cheees
 
         }
 
-        override public List<ChessPosition> move(ChessBoard chessBoard)
+        override public ChessPosition move(ChessBoard chessBoard)
         {
             int Score = 0;
             int Best_Score = Score;
@@ -196,9 +196,5 @@ namespace Cheees
             }
         }
 
-        public override void update()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

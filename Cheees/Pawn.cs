@@ -10,6 +10,7 @@ namespace Cheees
 {
     public class Pawn : Figure
     {
+        
         //ChessPosition cheesPosition;
         public Pawn(string color)
         {
@@ -19,109 +20,73 @@ namespace Cheees
             Price = 100;
         }
 
-
-        override public List<ChessPosition> move(ChessBoard chessBoard)
+    override public ChessPosition move(ChessBoard chessBoard)
         {
             List<ChessPosition> moveList = new List<ChessPosition>();
-            List<Figure> allFigure = new List<Figure>();
-            allFigure.AddRange(chessBoard.CheeesBlack);
-            allFigure.AddRange(chessBoard.CheeesWhite);
-            List<Figure> White = new List<Figure>();
-            List<Figure> Black = new List<Figure>();
-            Black.AddRange(chessBoard.CheeesBlack);
-            White.AddRange(chessBoard.CheeesWhite);
-
-
+            List<ChessPosition> kill2 = new List<ChessPosition>();
+            int buffer = 0;
+            int Best = 0;
+            
             if (ChessColor == "WHITE")
             {
-                ChessPosition y1 = new ChessPosition(x, y - 1);
-
-                moveList.Add(y1);
-                foreach (Figure figure in White)
+                for (int yy = this.y - 1; yy < 8; yy++)
                 {
-                    if ((y - 1 == figure.y && x == figure.x) || y - 1 < 0)
+                    if (chessBoard.chessTiles[yy, this.x].currentFigure == null)
                     {
-                        moveList.Remove(y1);
-
+                        moveList.Add(new ChessPosition(this.x, yy));
                     }
-                }
-
-                foreach (Figure figure in Black)
-                {
-                    if ((y - 1 == figure.y && x == figure.x) || y - 1 < 0)
-                    {
-                        moveList.Remove(y1);
-
-                    }
-                    if ((y - 1 == figure.y && x + 1 == figure.x) || y - 1 < 0)
+                    else if (chessBoard.chessTiles[yy, this.x + 1].currentFigure.ChessColor != this.ChessColor)
                     {
                         ChessPosition Kill = new ChessPosition(x + 1, y - 1);
-                        Kill.PriceTile = 100 + figure.Price;
-                        List<ChessPosition> kill2 = new List<ChessPosition>();
+                        Kill.PriceTile = 100 + chessBoard.chessTiles[yy, this.x].currentFigure.Price;
                         kill2.Add(Kill);
-                        return kill2;
                     }
-                    if ((y - 1 == figure.y && x - 1 == figure.x) || y - 2 < 0)
+                    else if (chessBoard.chessTiles[yy, this.x - 1].currentFigure.ChessColor != this.ChessColor)
                     {
                         ChessPosition Kill = new ChessPosition(x - 1, y - 1);
-                        Kill.PriceTile = 100 + figure.Price;
-                        List<ChessPosition> kill2 = new List<ChessPosition>();
+                        Kill.PriceTile = 100 + chessBoard.chessTiles[yy, this.x].currentFigure.Price;         
                         kill2.Add(Kill);
-                        return kill2;
                     }
-
-
+                    else { break; }
                 }
             }
-
-
             if (ChessColor == "BLACK")
             {
-                ChessPosition y1 = new ChessPosition(x, y + 1);
-
-                moveList.Add(y1);
-
-                if (y + 1 > 8)
+                for (int yy = this.y + 1; yy < 8; yy++)
                 {
-                    moveList.Remove(y1);
-                }
-
-                foreach (Figure figure in Black)
-                {
-                    if ((y + 1 == figure.y && x == figure.x) || y - 1 < 0)
+                    if (chessBoard.chessTiles[yy, this.x].currentFigure == null)
                     {
-                        return moveList;
-
+                        moveList.Add(new ChessPosition(this.x, yy));
                     }
-                }
-
-                foreach (Figure figure in White)
-                {
-                    if ((y + 1 == figure.y && x == figure.x) || y - 1 < 0)
-                    {
-                        moveList.Remove(y1);
-
-                    }
-                    if ((y + 1 == figure.y && x + 1 == figure.x) || y - 1 < 0)
+                    else if (chessBoard.chessTiles[yy, this.x + 1].currentFigure.ChessColor != this.ChessColor)
                     {
                         ChessPosition Kill = new ChessPosition(x + 1, y + 1);
-                        Kill.PriceTile = 100 + figure.Price;
-                        List<ChessPosition> kill2 = new List<ChessPosition>();
+                        Kill.PriceTile = 100 + chessBoard.chessTiles[yy, this.x].currentFigure.Price;
                         kill2.Add(Kill);
-                        return kill2;
                     }
-                    if (y + 1 == figure.y && x - 1 == figure.x)
+                    else if (chessBoard.chessTiles[yy, this.x - 1].currentFigure.ChessColor != this.ChessColor)
                     {
                         ChessPosition Kill = new ChessPosition(x - 1, y + 1);
-                        Kill.PriceTile = 100 + figure.Price;
-                        List<ChessPosition> kill2 = new List<ChessPosition>();
+                        Kill.PriceTile = 100 + chessBoard.chessTiles[yy, this.x].currentFigure.Price;
                         kill2.Add(Kill);
-                        return kill2;
                     }
+                    else { break; }
                 }
             }
-                return moveList;
-            
+            if(kill2 != null)
+            {
+                for(int i = 0; i < kill2.Count; i++)
+                {
+                    buffer = kill2[i].PriceTile;
+                    if(buffer > Best) { Best = kill2[i].PriceTile; }
+                }
+                for (int i = 0; i < kill2.Count; i++)
+                {
+                    if (kill2[i].PriceTile == Best) { return kill2[i]; }
+                }
+            }
+            int rand = rnd.Next(moveList.Count);
+            return moveList[rand];
         }
 
 
@@ -239,10 +204,5 @@ namespace Cheees
             }
         }
 
-
-        public override void update()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -260,7 +260,7 @@ namespace Cheees
 
         }
 
-        override public List<ChessPosition> move(ChessBoard chessBoard)
+        override public ChessPosition move(ChessBoard chessBoard)
         {
             List<ChessPosition> moveList = new List<ChessPosition>();
             List<Figure> allFigure = new List<Figure>();
@@ -532,11 +532,6 @@ namespace Cheees
                 Image img = Image.FromFile(path);
                 g.DrawImage(img, new Point(x, y));
             }
-        }
-
-        public override void update()
-        {
-            throw new NotImplementedException();
         }
     }
 }
