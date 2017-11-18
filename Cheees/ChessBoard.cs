@@ -18,6 +18,7 @@ namespace Cheees
         public List<Pawn> pawnsWhite;
         public List<Pawn> pawnsBlack;
         public List<ChessPosition> moveList;
+        public ChessPosition move;
         public List<Rook> RookWhite;
         public List<Rook> RookBlack;
         public List<Figure> CheeesWhite;
@@ -156,24 +157,19 @@ namespace Cheees
             {
                 CurrentChees = ChessRand;
             }
-            moveList = CheeesBlack[CurrentChees].move(this);
-            if (moveList.Count != 0)
+            move = CheeesBlack[CurrentChees].move(this);
+            if (move != null)
             {
-                int buf = 0;
-                for(int i = 1; i < moveList.Count; i++)
-                {
-                    if(moveList[i].PriceTile > moveList[i-1].PriceTile) { buf = i; }
-                }
+                CheeesBlack[CurrentChees].x = move.x;
+                CheeesBlack[CurrentChees].y = move.y;
+                Console.Out.Write("Черная пешка # " + CurrentChees + " ходит на координаты " + " X:" + moveList[0].x + " Y:" + moveList[0].y);
                 for (int i = 0; i < CheeesWhite.Count; i++)
                 {
-                    if (CheeesWhite[i].x == CheeesBlack[CurrentChees].x + 1 && CheeesWhite[i].y == CheeesBlack[CurrentChees].y + 1 || CheeesWhite[i].x == CheeesBlack[CurrentChees].x - 1 && CheeesWhite[i].y == CheeesBlack[CurrentChees].y + 1)
+                    if (CheeesWhite[i].x == CheeesBlack[CurrentChees].x && CheeesWhite[i].y == CheeesBlack[CurrentChees].y)
                     {
                         CheeesWhite.RemoveAt(i);
                     }
                 }
-                CheeesBlack[CurrentChees].x = moveList[buf].x;
-                CheeesBlack[CurrentChees].y = moveList[buf].y;
-                Console.Out.Write("Черная пешка # " + CurrentChees + " ходит на координаты " + " X:" + moveList[0].x + " Y:" + moveList[0].y);
                 draw();
                 update();
             }
@@ -199,25 +195,19 @@ namespace Cheees
             {
                 CurrentChees = ChessRand;
             }
-            moveList = CheeesWhite[CurrentChees].move(this);
-            if (moveList.Count != 0)
+            move = CheeesWhite[CurrentChees].move(this);
+            if(move != null)
             {
-                int buf = 0;
-                for (int i = 1; i < moveList.Count; i++)
+                CheeesWhite[CurrentChees].x = move.x;
+                CheeesWhite[CurrentChees].y = move.y;
+                Console.Out.Write("Белая пешка # " + CurrentChees + " ходит на координаты " + " X:" + moveList[0].x + " Y:" + moveList[0].y);
+                for(int i = 0; i < CheeesBlack.Count; i++)
                 {
-                    if (moveList[i].PriceTile > moveList[i - 1].PriceTile) { buf = i; }
-                }
-                for (int i = 0; i < CheeesBlack.Count; i++)
-                {
-                    if (CheeesBlack[i].x == CheeesWhite[CurrentChees].x + 1 && CheeesBlack[i].y == CheeesWhite[CurrentChees].y - 1 || CheeesBlack[i].x == CheeesWhite[CurrentChees].x - 1 && CheeesBlack[i].y == CheeesWhite[CurrentChees].y - 1)
+                    if(CheeesBlack[i].x == CheeesWhite[CurrentChees].x && CheeesBlack[i].y == CheeesWhite[CurrentChees].y)
                     {
                         CheeesBlack.RemoveAt(i);
                     }
                 }
-
-                CheeesWhite[CurrentChees].x = moveList[buf].x;
-                CheeesWhite[CurrentChees].y = moveList[buf].y;
-                Console.Out.Write("Белая пешка # " + CurrentChees + " ходит на координаты " + " X:" + moveList[0].x + " Y:" + moveList[0].y);
                 draw();
                 update();
             }
@@ -262,8 +252,18 @@ namespace Cheees
 
         public void update()
         {
+            ///CLEAR ALL FIGURE
+            for(int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    chessTiles[i, j].currentFigure = null;
+                }
+            }
+            
             for (int i = 0; i < CheeesBlack.Count; i++)
             {
+                
                 chessTiles[CheeesBlack[i].x, CheeesBlack[i].y].drawFigure(g, CheeesBlack[i]);
                 chessTiles[CheeesBlack[i].x, CheeesBlack[i].y].currentFigure = CheeesBlack[i];
 
@@ -271,6 +271,7 @@ namespace Cheees
 
             for (int i = 0; i < CheeesWhite.Count; i++)
             {
+                
                 chessTiles[CheeesWhite[i].x, CheeesWhite[i].y].drawFigure(g, CheeesWhite[i]);
                 chessTiles[CheeesWhite[i].x, CheeesWhite[i].y].currentFigure = CheeesWhite[i];
             }
