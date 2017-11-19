@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cheees
 {
-    class TileChess
+    public class TileChess
     {
         public int xReal, yReal;
         public int x,y;

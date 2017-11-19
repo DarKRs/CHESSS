@@ -200,7 +200,6 @@ namespace Cheees
             {
                 CheeesWhite[CurrentChees].x = move.x;
                 CheeesWhite[CurrentChees].y = move.y;
-                Console.Out.Write("Белая пешка # " + CurrentChees + " ходит на координаты " + " X:" + moveList[0].x + " Y:" + moveList[0].y);
                 for(int i = 0; i < CheeesBlack.Count; i++)
                 {
                     if(CheeesBlack[i].x == CheeesWhite[CurrentChees].x && CheeesBlack[i].y == CheeesWhite[CurrentChees].y)

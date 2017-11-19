@@ -20,57 +20,57 @@ namespace Cheees
 
         override public int AlpBet(ChessBoard chessBoard,int ScoreDepth = 0, int Depth = 1)
         {
-            int Score = 50;
+            int Score =0;
             /////////////////////////////////////////////DIAGONALS//////////////////////////////////////
             /////////////////////////////////////////////DOWN & LEFT////////////////////////////////////
-            for (int yy = this.y + 1, xx = this.x - 1; yy < 8 || xx >= 0; xx--, yy++)
+            for (int yy = this.y + 1, xx = this.x - 1; yy < 8 && xx >= 0; xx--, yy++)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     Score = 50 + ScoreDepth;
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price + ScoreDepth;
+                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
                 }
                 else { Score = 0; }
             }
             /////////////////////////////////////////////DOWN & RIGHT////////////////////////////////////
-            for (int yy = this.y + 1, xx = this.x + 1; yy < 8 || xx < 8; xx++, yy++)
+            for (int yy = this.y + 1, xx = this.x + 1; yy < 8 && xx < 8; xx++, yy++)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     Score = 50 + ScoreDepth;
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price + ScoreDepth;
+                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
                 }
                 else { Score = 0; }
             }
             /////////////////////////////////////////////UP && LEFT////////////////////////////////////
-            for (int yy = this.y - 1, xx = this.x - 1; yy >= 0 || xx >= 0; xx--, yy--)
+            for (int yy = this.y - 1, xx = this.x - 1; yy >= 0 && xx >= 0; xx--, yy--)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     Score = 50 + ScoreDepth;
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price + ScoreDepth;
+                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
                 }
                 else { Score = 0; }
             }
             /////////////////////////////////////////////UP && RIGHT////////////////////////////////////
-            for (int yy = this.y - 1, xx = this.x + 1; yy >= 0 || xx < 8; xx++, yy--)
+            for (int yy = this.y - 1, xx = this.x + 1; yy >= 0 && xx < 8; xx++, yy--)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     Score = 50 + ScoreDepth;
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price + ScoreDepth;
+                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
                 }
                 else { Score = 0; }
             }
@@ -78,52 +78,52 @@ namespace Cheees
             ////////////////////////////////////////////////////DOWN/////////////////////////////////////////////
             for (int yy = this.y + 1, xx = this.x; yy < 8; yy++)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     Score = 50 + ScoreDepth;
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price + ScoreDepth;
+                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
                 }
                 else { Score = 0; }
             }
             ////////////////////////////////////////////////////LEFT/////////////////////////////////////////////
             for (int yy = this.y, xx = this.x - 1; xx >= 0; xx--)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     Score = 50 + ScoreDepth;
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price + ScoreDepth;
+                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
                 }
                 else { Score = 0; }
             }
             ////////////////////////////////////////////////////RIGHT/////////////////////////////////////////////
             for (int yy = this.y, xx = this.x + 1; xx < 8; xx++)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     Score = 50 + ScoreDepth;
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price + ScoreDepth;
+                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
                 }
                 else { Score = 0; }
             }
             ////////////////////////////////////////////////////UP/////////////////////////////////////////////
             for (int yy = this.y - 1, xx = this.x; yy >= 0; yy--)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     Score = 50 + ScoreDepth;
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price + ScoreDepth;
+                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
                 }
                 else { Score = 0; }
             }   
@@ -139,61 +139,61 @@ namespace Cheees
             int Best = 0;
             /////////////////////////////////////////////DIAGONALS//////////////////////////////////////
             /////////////////////////////////////////////DOWN & LEFT////////////////////////////////////
-            for (int yy = this.y + 1,xx = this.x - 1; yy <8 || xx >= 0; xx--, yy++)
+            for (int yy = this.y + 1,xx = this.x - 1; yy <8 && xx >= 0; xx--, yy++)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     moveList.Add(new ChessPosition(xx, yy));
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(xx, yy);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price;
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     kill2.Add(Kill);
                 }
                 else { break; }
             }
             /////////////////////////////////////////////DOWN & RIGHT////////////////////////////////////
-            for (int yy = this.y + 1, xx = this.x + 1; yy < 8 || xx < 8; xx++, yy++)
+            for (int yy = this.y + 1, xx = this.x + 1; yy < 8 && xx < 8; xx++, yy++)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     moveList.Add(new ChessPosition(xx, yy));
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(xx, yy);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price;
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     kill2.Add(Kill);
                 }
                 else { break; }
             }
             /////////////////////////////////////////////UP && LEFT////////////////////////////////////
-            for (int yy = this.y - 1, xx = this.x - 1; yy >= 0 || xx >= 0; xx--, yy--)
+            for (int yy = this.y - 1, xx = this.x - 1; yy >= 0 && xx >= 0; xx--, yy--)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     moveList.Add(new ChessPosition(xx, yy));
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(xx, yy);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price;
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     kill2.Add(Kill);
                 }
                 else { break; }
             }
             /////////////////////////////////////////////UP && RIGHT////////////////////////////////////
-            for (int yy = this.y - 1, xx = this.x + 1; yy >= 0 || xx < 8; xx++, yy--)
+            for (int yy = this.y - 1, xx = this.x + 1; yy >= 0 && xx < 8; xx++, yy--)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     moveList.Add(new ChessPosition(xx, yy));
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(xx, yy);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price;
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     kill2.Add(Kill);
                 }
                 else { break; }
@@ -202,14 +202,14 @@ namespace Cheees
             ////////////////////////////////////////////////////DOWN/////////////////////////////////////////////
             for (int yy = this.y + 1, xx = this.x; yy < 8;yy++)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     moveList.Add(new ChessPosition(xx, yy));
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(xx, yy);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price;
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     kill2.Add(Kill);
                 }
                 else { break; }
@@ -217,14 +217,14 @@ namespace Cheees
             ////////////////////////////////////////////////////LEFT/////////////////////////////////////////////
             for (int yy = this.y, xx = this.x - 1; xx >= 0; xx--)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     moveList.Add(new ChessPosition(xx, yy));
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(xx, yy);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price;
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     kill2.Add(Kill);
                 }
                 else { break; }
@@ -232,14 +232,14 @@ namespace Cheees
             ////////////////////////////////////////////////////RIGHT/////////////////////////////////////////////
             for (int yy = this.y, xx = this.x + 1; xx < 8; xx++)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     moveList.Add(new ChessPosition(xx, yy));
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(xx, yy);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price;
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     kill2.Add(Kill);
                 }
                 else { break; }
@@ -247,14 +247,14 @@ namespace Cheees
             ////////////////////////////////////////////////////UP/////////////////////////////////////////////
             for (int yy = this.y - 1, xx = this.x; yy >= 0; yy--)
             {
-                if (chessBoard.chessTiles[yy, xx].currentFigure == null)
+                if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
                     moveList.Add(new ChessPosition(xx, yy));
                 }
-                else if (chessBoard.chessTiles[yy, xx].currentFigure.ChessColor != this.ChessColor)
+                else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(xx, yy);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[yy, xx].currentFigure.Price;
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     kill2.Add(Kill);
                 }
                 else { break; }
@@ -272,7 +272,8 @@ namespace Cheees
                     if (kill2[i].PriceTile == Best) { return kill2[i]; }
                 }
             }
-            int rand = rnd.Next(moveList.Count);
+            
+            int rand = rnd.Next(0, moveList.Count);
             return moveList[rand];
         }
 
