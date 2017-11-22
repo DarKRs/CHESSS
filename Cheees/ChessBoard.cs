@@ -144,7 +144,7 @@ namespace Cheees
         public void updateBlack()
         {
            
-            int ChessRand = rnd.Next(8);
+            int ChessRand = rnd.Next(CheeesBlack.Count-1);
             int CurrentChees = 0;
             int buffer = 0;
             int Best = 0;
@@ -162,11 +162,16 @@ namespace Cheees
             {
                 CheeesBlack[CurrentChees].x = move.x;
                 CheeesBlack[CurrentChees].y = move.y;
-                Console.Out.Write("Черная пешка # " + CurrentChees + " ходит на координаты " + " X:" + moveList[0].x + " Y:" + moveList[0].y);
+               
                 for (int i = 0; i < CheeesWhite.Count; i++)
                 {
                     if (CheeesWhite[i].x == CheeesBlack[CurrentChees].x && CheeesWhite[i].y == CheeesBlack[CurrentChees].y)
                     {
+                        if(CheeesWhite[i].Name == "KING")
+                        {
+                            MessageBox.Show("GAME OWER (ВСЕ КОНЕЦ)",
+                             "Победа черных", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                         CheeesWhite.RemoveAt(i);
                     }
                 }
@@ -182,7 +187,7 @@ namespace Cheees
 
         public void updateWhite()
         {
-            int ChessRand = rnd.Next(8);
+            int ChessRand = rnd.Next(CheeesWhite.Count-1);
             int CurrentChees = 0;
             int buffer = 0;
             int Best = 0;
@@ -204,6 +209,11 @@ namespace Cheees
                 {
                     if(CheeesBlack[i].x == CheeesWhite[CurrentChees].x && CheeesBlack[i].y == CheeesWhite[CurrentChees].y)
                     {
+                        if (CheeesWhite[i].Name == "KING")
+                        {
+                            MessageBox.Show("GAME OWER (ВСЕ КОНЕЦ)",
+                             "Победа белых", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                         CheeesBlack.RemoveAt(i);
                     }
                 }

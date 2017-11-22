@@ -12,6 +12,7 @@ namespace Cheees
     {
         public KING(string color)
         {
+            Name = "KING";
             int x = 0;
             int y = 0;
             this.ChessColor = color;
@@ -253,6 +254,10 @@ namespace Cheees
                 {
                     if (kill2[i].PriceTile == Best) { return kill2[i]; }
                 }
+            }
+            if (moveList.Count == 0)
+            {
+                return null;
             }
             int rand = rnd.Next(0, moveList.Count);
             return moveList[rand];

@@ -11,6 +11,7 @@ namespace Cheees
    public abstract class Figure
     {
         protected Random rnd = new Random();
+        public string Name;
         public int x;
         public int y;
         public int Price;

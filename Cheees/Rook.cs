@@ -12,6 +12,7 @@ namespace Cheees
     {
         public Rook(string color)
         {
+            Name = "Tower";
             int x = 0;
             int y = 0;
             this.ChessColor = color;
@@ -31,9 +32,9 @@ namespace Cheees
                 }
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
+                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth; break;
                 }
-                else { Score = 0; }
+                else{ Score = 0; break; }
             }
             ////////////////////////////////////////////////////LEFT/////////////////////////////////////////////
             for (int yy = this.y, xx = this.x - 1; xx >= 0; xx--)
@@ -44,9 +45,9 @@ namespace Cheees
                 }
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
+                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth; break;
                 }
-                else { Score = 0; }
+                else { Score = 0; break; }
             }
             ////////////////////////////////////////////////////RIGHT/////////////////////////////////////////////
             for (int yy = this.y, xx = this.x + 1; xx < 8; xx++)
@@ -57,9 +58,9 @@ namespace Cheees
                 }
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
+                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth; break;
                 }
-                else { Score = 0; }
+                else { Score = 0; break; }
             }
             ////////////////////////////////////////////////////UP/////////////////////////////////////////////
             for (int yy = this.y - 1, xx = this.x; yy >= 0; yy--)
@@ -70,9 +71,9 @@ namespace Cheees
                 }
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
+                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth; break;
                 }
-                else { Score = 0; }
+                else { Score = 0; break; }
             }
             return Score;
 
@@ -97,6 +98,7 @@ namespace Cheees
                     ChessPosition Kill = new ChessPosition(xx, yy);
                     Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     kill2.Add(Kill);
+                    break;
                 }
                 else { break; }
             }
@@ -112,6 +114,7 @@ namespace Cheees
                     ChessPosition Kill = new ChessPosition(xx, yy);
                     Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     kill2.Add(Kill);
+                    break;
                 }
                 else { break; }
             }
@@ -127,6 +130,7 @@ namespace Cheees
                     ChessPosition Kill = new ChessPosition(xx, yy);
                     Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     kill2.Add(Kill);
+                    break;
                 }
                 else { break; }
             }
@@ -142,6 +146,7 @@ namespace Cheees
                     ChessPosition Kill = new ChessPosition(xx, yy);
                     Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     kill2.Add(Kill);
+                    break;
                 }
                 else { break; }
             }
@@ -157,6 +162,10 @@ namespace Cheees
                 {
                     if (kill2[i].PriceTile == Best) { return kill2[i]; }
                 }
+            }
+            if(moveList.Count == 0)
+            {
+                return null;
             }
             int rand = rnd.Next(0, moveList.Count);
             return moveList[rand];
