@@ -21,61 +21,81 @@ namespace Cheees
 
         override public int AlpBet(ChessBoard chessBoard, int ScoreDepth = 0, int Depth = 1)
         {
-            int Score = 0;
+            int[] Score = new int[256];
+            int BestScore = 0;
+            int buff;
+            int i = 0;
             ////////////////////////////////////////////////VERTICAL & HORIZANTAL////////////////////////////////
             ////////////////////////////////////////////////////DOWN/////////////////////////////////////////////
             for (int yy = this.y + 1, xx = this.x; yy < 8; yy++)
             {
                 if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
-                    Score = 50 + ScoreDepth;
+                    Score[i] = 50 + ScoreDepth;
+                    i++;
                 }
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth; break;
+                    Score[i] = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
+                    i++;
+                    break;
                 }
-                else{ Score = 0; break; }
+                else{ Score[i] = 0; i++; break; }
             }
             ////////////////////////////////////////////////////LEFT/////////////////////////////////////////////
             for (int yy = this.y, xx = this.x - 1; xx >= 0; xx--)
             {
                 if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
-                    Score = 50 + ScoreDepth;
+                    Score[i] = 50 + ScoreDepth;
+                    i++;
                 }
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth; break;
+                    Score[i] = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
+                    i++;
+                    break;
                 }
-                else { Score = 0; break; }
+                else { Score[i] = 0; i++; break; }
             }
             ////////////////////////////////////////////////////RIGHT/////////////////////////////////////////////
             for (int yy = this.y, xx = this.x + 1; xx < 8; xx++)
             {
                 if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
-                    Score = 50 + ScoreDepth;
+                    Score[i] = 50 + ScoreDepth;
+                    i++;
                 }
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth; break;
+                    Score[i] = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
+                    i++;
+                    break;
                 }
-                else { Score = 0; break; }
+                else { Score[i] = 0; i++; break; }
             }
             ////////////////////////////////////////////////////UP/////////////////////////////////////////////
             for (int yy = this.y - 1, xx = this.x; yy >= 0; yy--)
             {
                 if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
-                    Score = 50 + ScoreDepth;
+                    Score[i] = 50 + ScoreDepth;
+                    i++;
                 }
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth; break;
+                    Score[i] = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price + ScoreDepth;
+                    i++;
+                    break;
                 }
-                else { Score = 0; break; }
+                else { Score[i] = 0; i++; break; }
             }
-            return Score;
+            for (int j = 0; j < Score.Length; j++)
+            {
+                buff = Score[j];
+                if (buff > BestScore) { BestScore = buff; }
+            }
+            return BestScore;
 
         }
 

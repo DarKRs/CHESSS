@@ -36,13 +36,13 @@ namespace Cheees
                     {
                         moveList.Add(new ChessPosition(this.x, yy));
                     }
-                    else if (this.x + 1 < 8 && chessBoard.chessTiles[this.x + 1, yy].currentFigure.ChessColor != this.ChessColor && chessBoard.chessTiles[this.x + 1, yy].currentFigure != null)
+                    else if (this.x + 1 < 8 && chessBoard.chessTiles[this.x + 1, yy].currentFigure != null && chessBoard.chessTiles[this.x + 1, yy].currentFigure.ChessColor != this.ChessColor)
                     {
                         ChessPosition Kill = new ChessPosition(x + 1, yy);
                         Kill.PriceTile = 100 + chessBoard.chessTiles[this.x + 1, yy].currentFigure.Price;
                         kill2.Add(Kill);
                     }
-                    else if (this.x - 1 >= 0 && chessBoard.chessTiles[this.x - 1, yy].currentFigure.ChessColor != this.ChessColor && chessBoard.chessTiles[this.x - 1, yy].currentFigure != null)
+                    else if (this.x - 1 >= 0 && chessBoard.chessTiles[this.x - 1, yy].currentFigure != null && chessBoard.chessTiles[this.x - 1, yy].currentFigure.ChessColor != this.ChessColor)
                     {
                         ChessPosition Kill = new ChessPosition(this.x - 1, yy);
                         Kill.PriceTile = 100 + chessBoard.chessTiles[this.x - 1, yy].currentFigure.Price;

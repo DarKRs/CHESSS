@@ -21,6 +21,8 @@ namespace Cheees
 
         override public int AlpBet(ChessBoard chessBoard, int ScoreDepth = 0, int Depth = 1)
         {
+            List<Figure> BlackFigure = chessBoard.CheeesBlack;
+            List<Figure> WhiteFigure = chessBoard.CheeesWhite;
             int[] Score = new int[256];
             int BestScore = 0;
             int buff;
@@ -31,6 +33,7 @@ namespace Cheees
             {
                 if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
+                    
                     Score[i] = 50 + ScoreDepth;
                     i++;
                 }

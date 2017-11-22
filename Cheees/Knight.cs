@@ -122,7 +122,7 @@ namespace Cheees
                 }
                 else if (chessBoard.chessTiles[this.x + 2, this.y + 1].currentFigure != null && chessBoard.chessTiles[this.x + 2, this.y + 1].currentFigure.ChessColor != this.ChessColor)
                 {
-                    Score[i] = 100 + chessBoard.chessTiles[this.y + 1, this.x + 2].currentFigure.Price + ScoreDepth; i++;
+                    Score[i] = 100 + chessBoard.chessTiles[this.x + 2, this.y + 1].currentFigure.Price + ScoreDepth; i++;
                 }
             }
             for (int j = 0; j < Score.Length; j++)
