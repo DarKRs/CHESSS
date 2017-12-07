@@ -33,7 +33,6 @@ namespace Cheees
             {
                 if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
-                    
                     Score[i] = 50 + ScoreDepth;
                     i++;
                 }

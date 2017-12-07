@@ -8,5 +8,6 @@ namespace Cheees
 {
     class AlphaBeta
     {
+
     }
 }
