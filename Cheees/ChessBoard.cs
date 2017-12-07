@@ -157,6 +157,20 @@ namespace Cheees
             {
                 CurrentChees = ChessRand;
             }
+            /////////////////////////////////Проверка на безопасность короля///////////////////////////////
+            for (int i = 0; i < CheeesWhite.Count; i++)
+            {
+                if (CheeesWhite[i].AlpBet(this) == 9999 + 100)
+                {
+                    for (int j = 0; i < CheeesBlack.Count; i++)
+                    {
+                        if (CheeesBlack[i].Name == "KING")
+                        {
+                            CurrentChees = i;
+                        }
+                    }
+                }
+            }
             move = CheeesBlack[CurrentChees].move(this);
             if (move != null)
             {
@@ -187,7 +201,7 @@ namespace Cheees
 
         public void updateWhite()
         {
-            int ChessRand = rnd.Next(CheeesWhite.Count-1);
+            int ChessRand = rnd.Next(CheeesWhite.Count - 1);
             int CurrentChees = 0;
             int buffer = 0;
             int Best = 0;
@@ -200,6 +214,21 @@ namespace Cheees
             {
                 CurrentChees = ChessRand;
             }
+            /////////////////////////////////Проверка на безопасность короля///////////////////////////////
+            for (int i = 0; i < CheeesBlack.Count; i++)
+            {
+                if(CheeesBlack[i].AlpBet(this) == 9999 + 100)
+                {
+                    for(int j=0; i < CheeesWhite.Count; i++)
+                    {
+                        if(CheeesWhite[i].Name == "KING")
+                        {
+                            CurrentChees = i;
+                        }
+                    }
+                }
+            }
+            
             move = CheeesWhite[CurrentChees].move(this);
             if(move != null)
             {
@@ -209,7 +238,7 @@ namespace Cheees
                 {
                     if(CheeesBlack[i].x == CheeesWhite[CurrentChees].x && CheeesBlack[i].y == CheeesWhite[CurrentChees].y)
                     {
-                        if (CheeesWhite[i].Name == "KING")
+                        if (CheeesBlack[i].Name == "KING")
                         {
                             MessageBox.Show("GAME OWER (ВСЕ КОНЕЦ)",
                              "Победа белых", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -286,6 +315,8 @@ namespace Cheees
                 chessTiles[CheeesWhite[i].x, CheeesWhite[i].y].currentFigure = CheeesWhite[i];
             }
         }
+
+
     }
     }
 

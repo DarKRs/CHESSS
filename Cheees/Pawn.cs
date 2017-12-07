@@ -36,19 +36,19 @@ namespace Cheees
                     {
                         moveList.Add(new ChessPosition(this.x, yy));
                     }
-                    else if (this.x + 1 < 8 && chessBoard.chessTiles[this.x + 1, yy].currentFigure != null && chessBoard.chessTiles[this.x + 1, yy].currentFigure.ChessColor != this.ChessColor)
+                    if (this.x + 1 < 8 && chessBoard.chessTiles[this.x + 1, yy].currentFigure != null && chessBoard.chessTiles[this.x + 1, yy].currentFigure.ChessColor != this.ChessColor)
                     {
                         ChessPosition Kill = new ChessPosition(x + 1, yy);
                         Kill.PriceTile = 100 + chessBoard.chessTiles[this.x + 1, yy].currentFigure.Price;
                         kill2.Add(Kill);
                     }
-                    else if (this.x - 1 >= 0 && chessBoard.chessTiles[this.x - 1, yy].currentFigure != null && chessBoard.chessTiles[this.x - 1, yy].currentFigure.ChessColor != this.ChessColor)
+                    if (this.x - 1 >= 0 && chessBoard.chessTiles[this.x - 1, yy].currentFigure != null && chessBoard.chessTiles[this.x - 1, yy].currentFigure.ChessColor != this.ChessColor)
                     {
                         ChessPosition Kill = new ChessPosition(this.x - 1, yy);
                         Kill.PriceTile = 100 + chessBoard.chessTiles[this.x - 1, yy].currentFigure.Price;
                         kill2.Add(Kill);
                     }
-                    else { return moveList[0]; }
+                    
                 
             }
             if (ChessColor == "BLACK")
@@ -59,19 +59,19 @@ namespace Cheees
                     {
                         moveList.Add(new ChessPosition(this.x, yy));
                     }
-                    else if (this.x + 1 < 8 && chessBoard.chessTiles[this.x + 1, yy].currentFigure.ChessColor != this.ChessColor && chessBoard.chessTiles[this.x + 1, yy].currentFigure != null)
+                    if (this.x + 1 < 8 && chessBoard.chessTiles[this.x + 1, yy].currentFigure != null &&  chessBoard.chessTiles[this.x + 1, yy].currentFigure.ChessColor != this.ChessColor)
                     {
                         ChessPosition Kill = new ChessPosition(x + 1, yy);
                         Kill.PriceTile = 100 + chessBoard.chessTiles[this.x +1, yy].currentFigure.Price;
                         kill2.Add(Kill);
                     }
-                    else if (this.x - 1 >= 0 && chessBoard.chessTiles[this.x - 1, yy].currentFigure.ChessColor != this.ChessColor && chessBoard.chessTiles[this.x - 1, yy].currentFigure != null)
+                   if (this.x - 1 >= 0 && chessBoard.chessTiles[this.x - 1, yy].currentFigure != null &&chessBoard.chessTiles[this.x - 1, yy].currentFigure.ChessColor != this.ChessColor)
                     {
                         ChessPosition Kill = new ChessPosition(this.x - 1, yy);
                         Kill.PriceTile = 100 + chessBoard.chessTiles[this.x-1, yy].currentFigure.Price;
                         kill2.Add(Kill);
                     }
-                    else { return moveList[0]; }
+                    
                 
             }
             if(kill2 != null)
@@ -85,6 +85,10 @@ namespace Cheees
                 {
                     if (kill2[i].PriceTile == Best) { return kill2[i]; }
                 }
+            }
+            if (moveList.Count == 0)
+            {
+                return null;
             }
             return moveList[0];
         }
@@ -100,20 +104,20 @@ namespace Cheees
             {
                 int yy = this.y - 1;
                 
-                    if (chessBoard.chessTiles[this.x, yy].currentFigure == null)
+                    if (yy >= 0 && chessBoard.chessTiles[this.x, yy].currentFigure == null)
                     {
                         Score[i] = 50+ScoreDepth;
                         i++;
                     }
                    
-                    else if (this.x + 1 < 8 && chessBoard.chessTiles[this.x + 1, yy].currentFigure != null && chessBoard.chessTiles[this.x + 1, yy].currentFigure.ChessColor != this.ChessColor)
+                   if (this.x + 1 < 8 && chessBoard.chessTiles[this.x + 1, yy].currentFigure != null && chessBoard.chessTiles[this.x + 1, yy].currentFigure.ChessColor != this.ChessColor)
                         {
                             Score[i] = 100 + chessBoard.chessTiles[this.x + 1, yy].currentFigure.Price + ScoreDepth; i++;
 
                            }
                     
                     
-                    else if (this.x - 1 >= 0 && chessBoard.chessTiles[this.x - 1, yy].currentFigure != null && chessBoard.chessTiles[this.x - 1, yy].currentFigure.ChessColor != this.ChessColor)
+                    if (this.x - 1 >= 0 && chessBoard.chessTiles[this.x - 1, yy].currentFigure != null && chessBoard.chessTiles[this.x - 1, yy].currentFigure.ChessColor != this.ChessColor)
                         {
                             Score[i] = 100 + chessBoard.chessTiles[this.x - 1, yy].currentFigure.Price + ScoreDepth; i++;
                         }
@@ -125,15 +129,15 @@ namespace Cheees
             {
                 int yy = this.y + 1;
                 
-                    if (chessBoard.chessTiles[this.x, yy].currentFigure == null)
+                    if (yy < 8 && chessBoard.chessTiles[this.x, yy].currentFigure == null)
                     {
                         Score[i] = 50 + ScoreDepth; i++;
                     }
-                    else if (this.x + 1 < 8 && chessBoard.chessTiles[this.x + 1, yy].currentFigure != null && chessBoard.chessTiles[this.x + 1, yy].currentFigure.ChessColor != this.ChessColor)
+                    if (this.x + 1 < 8 && chessBoard.chessTiles[this.x + 1, yy].currentFigure != null && chessBoard.chessTiles[this.x + 1, yy].currentFigure.ChessColor != this.ChessColor)
                     {
                         Score[i] = 100 + chessBoard.chessTiles[this.x + 1, yy].currentFigure.Price + ScoreDepth; i++;
                     }
-                    else if (this.x - 1 >= 0 && chessBoard.chessTiles[this.x - 1, yy].currentFigure != null && chessBoard.chessTiles[this.x - 1, yy].currentFigure.ChessColor != this.ChessColor)
+                    if (this.x - 1 >= 0 && chessBoard.chessTiles[this.x - 1, yy].currentFigure != null && chessBoard.chessTiles[this.x - 1, yy].currentFigure.ChessColor != this.ChessColor)
                     {
                         Score[i] = 100 + chessBoard.chessTiles[this.x - 1, yy].currentFigure.Price + ScoreDepth; i++;
                     }
