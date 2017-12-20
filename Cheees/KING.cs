@@ -16,7 +16,7 @@ namespace Cheees
             int x = 0;
             int y = 0;
             this.ChessColor = color;
-            Price = 9999;
+            Price = 999;
         }
 
         override public int AlpBet(ChessBoard chessBoard, int ScoreDepth = 0, int Depth = 1)
@@ -122,24 +122,22 @@ namespace Cheees
             return Score;
         }
 
-        override public ChessPosition move(ChessBoard chessBoard)
+        override public List<ChessPosition> move(ChessBoard chessBoard)
         {
             List<ChessPosition> moveList = new List<ChessPosition>();
-            List<ChessPosition> kill2 = new List<ChessPosition>();
-            int buffer = 0;
-            int Best = 0;
+
             /////////////////////////////////////LEFT///////////////////////////////////////////////
             if (this.x - 1 >= 0)
             {
                 if (chessBoard.chessTiles[this.x - 1, this.y].currentFigure == null)
                 {
-                    moveList.Add(new ChessPosition(this.x - 1, this.y));
+                    moveList.Add(new ChessPosition(this.x - 1, this.y,this));
                 }
                 else if (chessBoard.chessTiles[this.x - 1, this.y].currentFigure.ChessColor != this.ChessColor)
                 {
-                    ChessPosition Kill = new ChessPosition(this.x - 1, this.y);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[this.x - 1, this.y].currentFigure.Price;
-                    kill2.Add(Kill);
+                    ChessPosition Kill = new ChessPosition(this.x - 1, this.y,this);
+                    
+                    moveList.Add(Kill);
                 }
             }
             /////////////////////////////////////UP///////////////////////////////////////////////
@@ -147,13 +145,13 @@ namespace Cheees
             {
                 if (chessBoard.chessTiles[this.x, this.y - 1].currentFigure == null)
                 {
-                    moveList.Add(new ChessPosition(this.x, this.y - 1));
+                    moveList.Add(new ChessPosition(this.x, this.y - 1,this));
                 }
                 else if (chessBoard.chessTiles[this.x, this.y - 1].currentFigure.ChessColor != this.ChessColor)
                 {
-                    ChessPosition Kill = new ChessPosition(this.x, this.y - 1);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[this.x, this.y - 1].currentFigure.Price;
-                    kill2.Add(Kill);
+                    ChessPosition Kill = new ChessPosition(this.x, this.y - 1,this);
+                    
+                    moveList.Add(Kill);
                 }
             }
             ////////////////////////////////////////RIGHT/////////////////////////////////////////////
@@ -161,13 +159,13 @@ namespace Cheees
             {
                 if (chessBoard.chessTiles[this.x + 1, this.y].currentFigure == null)
                 {
-                    moveList.Add(new ChessPosition(this.x + 1, this.y));
+                    moveList.Add(new ChessPosition(this.x + 1, this.y,this));
                 }
                 else if (chessBoard.chessTiles[this.x + 1, this.y].currentFigure.ChessColor != this.ChessColor)
                 {
-                    ChessPosition Kill = new ChessPosition(this.x + 1, this.y);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[this.x + 1, this.y].currentFigure.Price;
-                    kill2.Add(Kill);
+                    ChessPosition Kill = new ChessPosition(this.x + 1, this.y,this);
+                    
+                    moveList.Add(Kill);
                 }
             }
             ////////////////////////////////////////DOWN/////////////////////////////////////////////
@@ -175,13 +173,13 @@ namespace Cheees
             {
                 if (chessBoard.chessTiles[this.x, this.y + 1].currentFigure == null)
                 {
-                    moveList.Add(new ChessPosition(this.x, this.y + 1));
+                    moveList.Add(new ChessPosition(this.x, this.y + 1,this));
                 }
                 else if (chessBoard.chessTiles[this.x, this.y + 1].currentFigure.ChessColor != this.ChessColor)
                 {
-                    ChessPosition Kill = new ChessPosition(this.x, this.y + 1);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[this.x, this.y + 1].currentFigure.Price;
-                    kill2.Add(Kill);
+                    ChessPosition Kill = new ChessPosition(this.x, this.y + 1,this);
+                   
+                    moveList.Add(Kill);
                 }
             }
             ////////////////////////////////////////////////DIOGONALS////////////////////////////////////////////////
@@ -190,13 +188,13 @@ namespace Cheees
             {
                 if (chessBoard.chessTiles[this.x - 1, this.y - 1].currentFigure == null)
                 {
-                    moveList.Add(new ChessPosition(this.x - 1, this.y - 1));
+                    moveList.Add(new ChessPosition(this.x - 1, this.y - 1,this));
                 }
                 else if (chessBoard.chessTiles[this.x - 1, this.y - 1].currentFigure.ChessColor != this.ChessColor)
                 {
-                    ChessPosition Kill = new ChessPosition(this.x - 1, this.y - 1);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[this.x - 1, this.y - 1].currentFigure.Price;
-                    kill2.Add(Kill);
+                    ChessPosition Kill = new ChessPosition(this.x - 1, this.y - 1,this);
+                   
+                    moveList.Add(Kill);
                 }
             }
             ////////////////////////////////////////////////UP & RIGHT///////////////////////////////////////////
@@ -204,13 +202,13 @@ namespace Cheees
             {
                 if (chessBoard.chessTiles[this.x + 1, this.y - 1].currentFigure == null)
                 {
-                    moveList.Add(new ChessPosition(this.x + 1, this.y - 1));
+                    moveList.Add(new ChessPosition(this.x + 1, this.y - 1,this));
                 }
                 else if (chessBoard.chessTiles[this.x + 1, this.y - 1].currentFigure.ChessColor != this.ChessColor)
                 {
-                    ChessPosition Kill = new ChessPosition(this.x + 1, this.y - 1);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[this.x + 1, this.y - 1].currentFigure.Price;
-                    kill2.Add(Kill);
+                    ChessPosition Kill = new ChessPosition(this.x + 1, this.y - 1,this);
+                    
+                    moveList.Add(Kill);
                 }
             }
             ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -219,13 +217,13 @@ namespace Cheees
             {
                 if (chessBoard.chessTiles[this.x + 1, this.y + 1].currentFigure == null)
                 {
-                    moveList.Add(new ChessPosition(this.x + 1, this.y + 1));
+                    moveList.Add(new ChessPosition(this.x + 1, this.y + 1,this));
                 }
                 else if (chessBoard.chessTiles[this.x + 1, this.y + 1].currentFigure.ChessColor != this.ChessColor)
                 {
-                    ChessPosition Kill = new ChessPosition(this.x + 1, this.y + 1);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[this.x + 1, this.y + 1].currentFigure.Price;
-                    kill2.Add(Kill);
+                    ChessPosition Kill = new ChessPosition(this.x + 1, this.y + 1,this);
+                   
+                    moveList.Add(Kill);
                 }
             }
             ////////////////////////////////////////////////DOWN & LEFT///////////////////////////////////////////
@@ -233,34 +231,26 @@ namespace Cheees
             {
                 if (chessBoard.chessTiles[this.x - 1, this.y + 1].currentFigure == null)
                 {
-                    moveList.Add(new ChessPosition(this.x - 1, this.y + 1));
+                    moveList.Add(new ChessPosition(this.x - 1, this.y + 1,this));
                 }
                 else if (chessBoard.chessTiles[this.x - 1, this.y + 1].currentFigure.ChessColor != this.ChessColor)
                 {
-                    ChessPosition Kill = new ChessPosition(this.x - 1, this.y + 1);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[this.x - 1, this.y + 1].currentFigure.Price;
-                    kill2.Add(Kill);
+                    ChessPosition Kill = new ChessPosition(this.x - 1, this.y + 1,this);
+                    
+                    moveList.Add(Kill);
                 }
             }
             ///////////////////////////////////////////////Вывод Мува////////////////////////////////////////////
-            if (kill2 != null)
-            {
-                for (int i = 0; i < kill2.Count; i++)
-                {
-                    buffer = kill2[i].PriceTile;
-                    if (buffer > Best) { Best = kill2[i].PriceTile; }
-                }
-                for (int i = 0; i < kill2.Count; i++)
-                {
-                    if (kill2[i].PriceTile == Best) { return kill2[i]; }
-                }
-            }
-            if (moveList.Count == 0)
-            {
-                return null;
-            }
-            int rand = rnd.Next(0, moveList.Count);
-            return moveList[rand];
+
+            return moveList;
+        }
+
+        public override void step(ChessPosition chessPosition)
+        {
+
+            x = chessPosition.x;
+            y = chessPosition.y;
+
         }
 
         public override void draw(Graphics g, int x, int y, string ChessColor)

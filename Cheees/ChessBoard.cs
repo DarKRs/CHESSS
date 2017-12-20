@@ -11,6 +11,7 @@ namespace Cheees
     public class ChessBoard //16x16
     {
         Graphics g;
+        AlphaBeta aIalpha;
 
         Random rnd = new Random();
         public TileChess[,] chessTiles;
@@ -21,8 +22,14 @@ namespace Cheees
         public ChessPosition move;
         public List<Rook> RookWhite;
         public List<Rook> RookBlack;
+        
+
+        private List<ChessPosition> saveMoves;
+        private List<Figure> saveFigs;
+
         public List<Figure> CheeesWhite;
         public List<Figure> CheeesBlack;
+
         public ChessBoard(Graphics graphics)
         {
             g = graphics;
@@ -136,124 +143,236 @@ namespace Cheees
                 RookBlack.Add(new Rook("BLACK"));
                 RookBlack[1].x = 8;
                 RookBlack[1].y = 0;*/
+
+            aIalpha = new AlphaBeta(this);
+            saveMoves = new List<ChessPosition>();
+            saveFigs = new List<Figure>();
         }
 
-
-        
-
-        public void updateBlack()
+        public void stepsUp()
         {
-           
-            int ChessRand = rnd.Next(CheeesBlack.Count-1);
-            int CurrentChees = 0;
-            int buffer = 0;
-            int Best = 0;
-            for (int i = 0; i < CheeesBlack.Count; i++)
+            List<Figure> allFig = new List<Figure>();
+            allFig.AddRange(CheeesBlack);
+            allFig.AddRange(CheeesWhite);
+
+
+            for (int i = 0; i < 8; i++)
             {
-                buffer = CheeesBlack[i].AlpBet(this);
-                if (buffer > Best) { Best = buffer; CurrentChees = i; }
-            }
-            if (Best == 50)
-            {
-                CurrentChees = ChessRand;
-            }
-            /////////////////////////////////Проверка на безопасность короля///////////////////////////////
-            for (int i = 0; i < CheeesWhite.Count; i++)
-            {
-                if (CheeesWhite[i].AlpBet(this) == 9999 + 100)
+                for (int j = 0; j < 8; j++)
                 {
-                    for (int j = 0; i < CheeesBlack.Count; i++)
-                    {
-                        if (CheeesBlack[i].Name == "KING")
-                        {
-                            CurrentChees = i;
-                        }
-                    }
+                    chessTiles[i,j].currentFigure= null;
                 }
             }
-            move = CheeesBlack[CurrentChees].move(this);
-            if (move != null)
+            foreach (Figure figure in allFig)
             {
-                CheeesBlack[CurrentChees].x = move.x;
-                CheeesBlack[CurrentChees].y = move.y;
-               
+                // System.out.println(figure.x + " " + figure.y + " --" + figure);
+                chessTiles[figure.x,figure.y].currentFigure = figure;
+            }
+        }
+
+        public void step(ChessPosition chessPosition)
+        {
+            saveMoves.Add(new ChessPosition(chessPosition.TileFigure.x, chessPosition.TileFigure.y, chessPosition.TileFigure));
+            chessPosition.TileFigure.step(chessPosition);
+            if (chessPosition.TileFigure.ChessColor == "WHITE")
+            {
                 for (int i = 0; i < CheeesWhite.Count; i++)
                 {
-                    if (CheeesWhite[i].x == CheeesBlack[CurrentChees].x && CheeesWhite[i].y == CheeesBlack[CurrentChees].y)
+                    for (int j = 0; j < CheeesBlack.Count; j++)
                     {
-                        if(CheeesWhite[i].Name == "KING")
+                        if (CheeesWhite[i].y == CheeesBlack[j].y && CheeesWhite[i].x == CheeesBlack[j].x)
                         {
-                            MessageBox.Show("GAME OWER (ВСЕ КОНЕЦ)",
-                             "Победа черных", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            saveFigs.Add(CheeesBlack[j]);
+                            CheeesBlack.RemoveAt(j);
                         }
-                        CheeesWhite.RemoveAt(i);
                     }
                 }
-                draw();
-                update();
             }
             else
             {
-                updateBlack();
-                return;
+                for (int i = 0; i < CheeesBlack.Count; i++)
+                {
+                    for (int j = 0; j < CheeesWhite.Count; j++)
+                    {
+                        if (CheeesWhite[j].y == CheeesBlack[i].y && CheeesWhite[j].x == CheeesBlack[i].x)
+                        {
+                            saveFigs.Add(CheeesWhite[j]);
+                            CheeesWhite.RemoveAt(j);
+                        }
+                    }
+                }
             }
+
+            stepsUp();
+        }
+
+        public void undo()
+        {
+            if (saveFigs.Count != 0)
+            {
+                foreach (Figure figure in saveFigs)
+                {
+                    if (figure.ChessColor == "BLACK")
+                    {
+                        CheeesBlack.Add(figure);
+                    }
+                    else
+                    {
+                        CheeesWhite.Add(figure);
+                    }
+                }
+            }
+
+            if (saveMoves.Count != 0)
+                foreach (ChessPosition csSave in saveMoves)
+                {
+                    csSave.TileFigure.step(csSave);
+                }
+            saveFigs.Clear();
+            saveMoves.Clear();
+        }
+
+
+        public void updateBlack()
+        {
+            step(aIalpha.MinMaxRoot(3, this, "BLACK"));
+            for (int i = 0; i < CheeesBlack.Count; i++)
+            {
+                for (int j = 0; j < CheeesWhite.Count; j++)
+                {
+                    if (CheeesWhite[j].y == CheeesBlack[i].y && CheeesWhite[j].x == CheeesBlack[i].x)
+                    {
+                        saveFigs.Add(CheeesWhite[j]);
+                        CheeesWhite.RemoveAt(j);
+                    }
+                }
+            }
+            draw();
+            update();
+            /*   int ChessRand = rnd.Next(CheeesBlack.Count-1);
+               int CurrentChees = 0;
+               int buffer = 0;
+               int Best = 0;
+               for (int i = 0; i < CheeesBlack.Count; i++)
+               {
+                   buffer = CheeesBlack[i].AlpBet(this);
+                   if (buffer > Best) { Best = buffer; CurrentChees = i; }
+               }
+               if (Best == 50)
+               {
+                   CurrentChees = ChessRand;
+               }
+               /////////////////////////////////Проверка на безопасность короля///////////////////////////////
+               for (int i = 0; i < CheeesWhite.Count; i++)
+               {
+                   if (CheeesWhite[i].AlpBet(this) == 9999 + 100)
+                   {
+                       for (int j = 0; i < CheeesBlack.Count; i++)
+                       {
+                           if (CheeesBlack[i].Name == "KING")
+                           {
+                               CurrentChees = i;
+                           }
+                       }
+                   }
+               }
+              // move = CheeesBlack[CurrentChees].move(this);
+               if (move != null)
+               {
+                   CheeesBlack[CurrentChees].x = move.x;
+                   CheeesBlack[CurrentChees].y = move.y;
+
+                   for (int i = 0; i < CheeesWhite.Count; i++)
+                   {
+                       if (CheeesWhite[i].x == CheeesBlack[CurrentChees].x && CheeesWhite[i].y == CheeesBlack[CurrentChees].y)
+                       {
+                           if(CheeesWhite[i].Name == "KING")
+                           {
+                               MessageBox.Show("GAME OWER (ВСЕ КОНЕЦ)",
+                                "Победа черных", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                           }
+                           CheeesWhite.RemoveAt(i);
+                       }
+                   }
+                   draw();
+                   update();
+               }
+               else
+               {
+                   updateBlack();
+                   return;
+               }*/
         }
 
         public void updateWhite()
         {
-            int ChessRand = rnd.Next(CheeesWhite.Count - 1);
-            int CurrentChees = 0;
-            int buffer = 0;
-            int Best = 0;
+            step(aIalpha.MinMaxRoot(3, this, "WHITE"));
             for (int i = 0; i < CheeesWhite.Count; i++)
             {
-                buffer = CheeesWhite[i].AlpBet(this);
-                if (buffer > Best) { Best = buffer; CurrentChees = i; }
-            }
-            if (Best == 50)
-            {
-                CurrentChees = ChessRand;
-            }
-            /////////////////////////////////Проверка на безопасность короля///////////////////////////////
-            for (int i = 0; i < CheeesBlack.Count; i++)
-            {
-                if(CheeesBlack[i].AlpBet(this) == 9999 + 100)
+                for (int j = 0; j < CheeesBlack.Count; j++)
                 {
-                    for(int j=0; i < CheeesWhite.Count; i++)
+                    if (CheeesWhite[i].y == CheeesBlack[j].y && CheeesWhite[i].x == CheeesBlack[j].x)
                     {
-                        if(CheeesWhite[i].Name == "KING")
-                        {
-                            CurrentChees = i;
-                        }
+                        saveFigs.Add(CheeesBlack[j]);
+                        CheeesBlack.RemoveAt(j);
                     }
                 }
             }
-            
-            move = CheeesWhite[CurrentChees].move(this);
-            if(move != null)
-            {
-                CheeesWhite[CurrentChees].x = move.x;
-                CheeesWhite[CurrentChees].y = move.y;
-                for(int i = 0; i < CheeesBlack.Count; i++)
-                {
-                    if(CheeesBlack[i].x == CheeesWhite[CurrentChees].x && CheeesBlack[i].y == CheeesWhite[CurrentChees].y)
-                    {
-                        if (CheeesBlack[i].Name == "KING")
-                        {
-                            MessageBox.Show("GAME OWER (ВСЕ КОНЕЦ)",
-                             "Победа белых", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        CheeesBlack.RemoveAt(i);
-                    }
-                }
-                draw();
-                update();
-            }
-            else
-            {
-                updateWhite();
-                return;
-            }
+            draw();
+            update();
+            /* int ChessRand = rnd.Next(CheeesWhite.Count - 1);
+             int CurrentChees = 0;
+             int buffer = 0;
+             int Best = 0;
+             for (int i = 0; i < CheeesWhite.Count; i++)
+             {
+                 buffer = CheeesWhite[i].AlpBet(this);
+                 if (buffer > Best) { Best = buffer; CurrentChees = i; }
+             }
+             if (Best == 50)
+             {
+                 CurrentChees = ChessRand;
+             }
+             /////////////////////////////////Проверка на безопасность короля///////////////////////////////
+             for (int i = 0; i < CheeesBlack.Count; i++)
+             {
+                 if(CheeesBlack[i].AlpBet(this) == 9999 + 100)
+                 {
+                     for(int j=0; i < CheeesWhite.Count; i++)
+                     {
+                         if(CheeesWhite[i].Name == "KING")
+                         {
+                             CurrentChees = i;
+                         }
+                     }
+                 }
+             }
+
+            // move = CheeesWhite[CurrentChees].move(this);
+             if(move != null)
+             {
+                 CheeesWhite[CurrentChees].x = move.x;
+                 CheeesWhite[CurrentChees].y = move.y;
+                 for(int i = 0; i < CheeesBlack.Count; i++)
+                 {
+                     if(CheeesBlack[i].x == CheeesWhite[CurrentChees].x && CheeesBlack[i].y == CheeesWhite[CurrentChees].y)
+                     {
+                         if (CheeesBlack[i].Name == "KING")
+                         {
+                             MessageBox.Show("GAME OWER (ВСЕ КОНЕЦ)",
+                              "Победа белых", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                         }
+                         CheeesBlack.RemoveAt(i);
+                     }
+                 }
+                 draw();
+                 update();
+             }
+             else
+             {
+                 updateWhite();
+                 return;
+             }*/
         }
 
 

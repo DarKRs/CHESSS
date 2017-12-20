@@ -18,11 +18,13 @@ namespace Cheees
         public string ChessColor;
         public string local = Directory.GetCurrentDirectory();
 
-        public abstract ChessPosition move(ChessBoard chessBoard);
+        public abstract List<ChessPosition> move(ChessBoard chessBoard);
 
         public abstract int AlpBet(ChessBoard chessBoard, int ScoreDepth = 0, int Depth = 1);
 
         public abstract void draw(Graphics g, int x, int y, string ChessColor);
+
+        public abstract void step(ChessPosition chessPosition);
 
     }
 }

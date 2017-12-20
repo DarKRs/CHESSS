@@ -11,12 +11,14 @@ namespace Cheees
         public int x;
         public int y;
         public int PriceTile;
+        public Figure TileFigure;
 
-        public ChessPosition(int x1, int y1)
+        public ChessPosition(int x1, int y1,Figure fig)
         {
             x = x1;
             y = y1;
             PriceTile = 50;
+            TileFigure = fig;
         }
     }
 }

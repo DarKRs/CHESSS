@@ -100,25 +100,23 @@ namespace Cheees
             return BestScore;
         }
 
-        override public ChessPosition move(ChessBoard chessBoard)
+        override public List<ChessPosition> move(ChessBoard chessBoard)
         {
             List<ChessPosition> moveList = new List<ChessPosition>();
-            List<ChessPosition> kill2 = new List<ChessPosition>();
-            int buffer = 0;
-            int Best = 0;
+
             /////////////////////////////////////////////DIAGONALS//////////////////////////////////////
             /////////////////////////////////////////////DOWN & LEFT////////////////////////////////////
             for (int yy = this.y + 1, xx = this.x - 1; yy < 8 && xx >= 0; xx--, yy++)
             {
                 if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
-                    moveList.Add(new ChessPosition(xx, yy));
+                    moveList.Add(new ChessPosition(xx, yy,this));
                 }
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    ChessPosition Kill = new ChessPosition(xx, yy);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
-                    kill2.Add(Kill);
+                    ChessPosition Kill = new ChessPosition(xx, yy,this);
+                    
+                    moveList.Add(Kill);
                     break;
                 }
                 else { break; }
@@ -128,13 +126,13 @@ namespace Cheees
             {
                 if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
-                    moveList.Add(new ChessPosition(xx, yy));
+                    moveList.Add(new ChessPosition(xx, yy,this));
                 }
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    ChessPosition Kill = new ChessPosition(xx, yy);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
-                    kill2.Add(Kill);
+                    ChessPosition Kill = new ChessPosition(xx, yy,this);
+                    
+                    moveList.Add(Kill);
                     break;
                 }
                 else { break; }
@@ -144,13 +142,13 @@ namespace Cheees
             {
                 if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
-                    moveList.Add(new ChessPosition(xx, yy));
+                    moveList.Add(new ChessPosition(xx, yy,this));
                 }
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    ChessPosition Kill = new ChessPosition(xx, yy);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
-                    kill2.Add(Kill);
+                    ChessPosition Kill = new ChessPosition(xx, yy,this);
+                   
+                    moveList.Add(Kill);
                     break;
                 }
                 else { break; }
@@ -160,36 +158,29 @@ namespace Cheees
             {
                 if (chessBoard.chessTiles[xx, yy].currentFigure == null)
                 {
-                    moveList.Add(new ChessPosition(xx, yy));
+                    moveList.Add(new ChessPosition(xx, yy,this));
                 }
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
-                    ChessPosition Kill = new ChessPosition(xx, yy);
-                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
-                    kill2.Add(Kill);
+                    ChessPosition Kill = new ChessPosition(xx, yy,this);
+                    
+                    moveList.Add(Kill);
                     break;
                 }
                 else { break; }
             }
             ////////////////////////////////////////////////OUTPUT//////////////////////////////////////////////
-            if (kill2 != null)
-            {
-                for (int i = 0; i < kill2.Count; i++)
-                {
-                    buffer = kill2[i].PriceTile;
-                    if (buffer > Best) { Best = kill2[i].PriceTile; }
-                }
-                for (int i = 0; i < kill2.Count; i++)
-                {
-                    if (kill2[i].PriceTile == Best) { return kill2[i]; }
-                }
-            }
-            if (moveList.Count == 0)
-            {
-                return null;
-            }
-            int rand = rnd.Next(0, moveList.Count);
-            return moveList[rand];
+         
+
+            return moveList;
+        }
+
+        public override void step(ChessPosition chessPosition)
+        {
+
+            x = chessPosition.x;
+            y = chessPosition.y;
+
         }
 
         public override void draw(Graphics g, int x, int y, string ChessColor)
