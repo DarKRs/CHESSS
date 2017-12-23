@@ -16,7 +16,7 @@ namespace Cheees
             int x = 0;
             int y = 0;
             this.ChessColor = color;
-            Price = 999;
+            Price = 9999;
         }
 
         override public int AlpBet(ChessBoard chessBoard, int ScoreDepth = 0, int Depth = 1)
@@ -136,7 +136,7 @@ namespace Cheees
                 else if (chessBoard.chessTiles[this.x - 1, this.y].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(this.x - 1, this.y,this);
-                    
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[this.x - 1, this.y].currentFigure.Price;
                     moveList.Add(Kill);
                 }
             }
@@ -150,7 +150,7 @@ namespace Cheees
                 else if (chessBoard.chessTiles[this.x, this.y - 1].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(this.x, this.y - 1,this);
-                    
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[this.x, this.y - 1].currentFigure.Price;
                     moveList.Add(Kill);
                 }
             }
@@ -164,7 +164,7 @@ namespace Cheees
                 else if (chessBoard.chessTiles[this.x + 1, this.y].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(this.x + 1, this.y,this);
-                    
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[this.x +1, this.y].currentFigure.Price;
                     moveList.Add(Kill);
                 }
             }
@@ -178,7 +178,7 @@ namespace Cheees
                 else if (chessBoard.chessTiles[this.x, this.y + 1].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(this.x, this.y + 1,this);
-                   
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[this.x, this.y + 1].currentFigure.Price;
                     moveList.Add(Kill);
                 }
             }

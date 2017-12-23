@@ -24,6 +24,8 @@ namespace Cheees
 
         public abstract void draw(Graphics g, int x, int y, string ChessColor);
 
+
+
         public abstract void step(ChessPosition chessPosition);
 
     }

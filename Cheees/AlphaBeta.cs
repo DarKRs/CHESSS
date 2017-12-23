@@ -55,7 +55,7 @@ namespace Cheees
             ChessPosition currentBestMove = null;
             if (Color == "WHITE")
             {
-                bestValue = -9999;
+                bestValue = int.MinValue;
                 for (int i = 0; i < board.CheeesWhite.Count; i++)
                 {
                     movelist.AddRange(board.CheeesWhite[i].move(board));
@@ -79,7 +79,7 @@ namespace Cheees
             }
             if (Color == "BLACK")
             {
-                bestValue = 9999;
+                bestValue = int.MaxValue;
 
                 for (int i = 0; i < board.CheeesBlack.Count; i++)
                 {
@@ -121,7 +121,7 @@ namespace Cheees
 
             if (Color == "WHITE")
             {
-                bestValue = -9999;
+                bestValue = int.MinValue;
 
                 foreach (Figure fW in newChessBoard.CheeesWhite)
                 {
@@ -145,7 +145,7 @@ namespace Cheees
 
             if (Color == "BLACK")
             {
-                bestValue = 9999;
+                bestValue = int.MaxValue;
                 foreach (Figure fW in newChessBoard.CheeesBlack)
                 {
                     moveList.AddRange(fW.move(newChessBoard));
