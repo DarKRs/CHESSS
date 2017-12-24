@@ -242,7 +242,8 @@ namespace Cheees
                 {
                     CurrentChees = i;
                 }
-            }if (CurrentChees != 999)
+            }
+            if (CurrentChees != 999)
             {
                 List<ChessPosition> killKingList = CheeesBlack[CurrentChees].move(this);
                 ChessPosition killKing = new ChessPosition(0, 0, CheeesBlack[CurrentChees]);
@@ -261,11 +262,12 @@ namespace Cheees
                 {
                     for (int j = 0; j < CheeesWhite.Count; j++)
                     {
-                        if (CheeesWhite[j].y == CheeesBlack[i].y && CheeesWhite[j].x == CheeesBlack[i].x)
+                        if (CheeesBlack[i].y == CheeesWhite[j].y && CheeesBlack[i].x == CheeesWhite[j].x)
                         {
-                            saveFigs.Add(CheeesWhite[j]);
+
                             CheeesWhite.RemoveAt(j);
                         }
+                      
                     }
                 }
                 draw();
@@ -286,6 +288,7 @@ namespace Cheees
                             saveFigs.Add(CheeesWhite[j]);
                             CheeesWhite.RemoveAt(j);
                         }
+                      
                     }
                 }
                 draw();
@@ -337,9 +340,9 @@ namespace Cheees
         public void updateWhite()
         {
             int CurrentChees = 999;
-            for (int i = 0; i < CheeesBlack.Count; i++)
+            for (int i = 0; i < CheeesWhite.Count; i++)
             {
-                if (CheeesBlack[i].AlpBet(this) == 9999 + 100)
+                if (CheeesWhite[i].AlpBet(this) == 9999 + 100)
                 {
                     CurrentChees = i;
                 }
@@ -377,7 +380,7 @@ namespace Cheees
             }
             else
             {
-                step(aIalpha.MinMaxRoot(4, this, "WHITE"));
+                step(aIalpha.MinMaxRoot(1, this, "WHITE"));
                 for (int i = 0; i < CheeesWhite.Count; i++)
                 {
                     for (int j = 0; j < CheeesBlack.Count; j++)

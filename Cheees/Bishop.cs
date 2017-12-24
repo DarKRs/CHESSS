@@ -115,7 +115,7 @@ namespace Cheees
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(xx, yy,this);
-                    
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     moveList.Add(Kill);
                     break;
                 }
@@ -131,7 +131,7 @@ namespace Cheees
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(xx, yy,this);
-                    
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     moveList.Add(Kill);
                     break;
                 }
@@ -147,7 +147,7 @@ namespace Cheees
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(xx, yy,this);
-                   
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     moveList.Add(Kill);
                     break;
                 }
@@ -163,7 +163,7 @@ namespace Cheees
                 else if (chessBoard.chessTiles[xx, yy].currentFigure.ChessColor != this.ChessColor)
                 {
                     ChessPosition Kill = new ChessPosition(xx, yy,this);
-                    
+                    Kill.PriceTile = 100 + chessBoard.chessTiles[xx, yy].currentFigure.Price;
                     moveList.Add(Kill);
                     break;
                 }
