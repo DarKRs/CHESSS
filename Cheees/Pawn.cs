@@ -10,8 +10,8 @@ namespace Cheees
 {
     public class Pawn : Figure
     {
-        
-        //ChessPosition cheesPosition;
+
+        bool FirstStep = true;
         public Pawn(string color)
         {
             Name = "Pawn";
@@ -29,6 +29,11 @@ namespace Cheees
             {
                 int yy = this.y - 1;
                 
+                    if (FirstStep && yy-1 >= 0 && chessBoard.chessTiles[this.x, yy].currentFigure == null)
+                    {
+                        moveList.Add(new ChessPosition(this.x, yy-1,this));
+                        this.FirstStep = false;
+                    }
                     if (yy >= 0 && chessBoard.chessTiles[this.x, yy].currentFigure == null)
                     {
                         moveList.Add(new ChessPosition(this.x, yy,this));
@@ -52,6 +57,11 @@ namespace Cheees
             {
                 int yy = this.y + 1;
                 
+                    if (FirstStep && yy+1 < 8 && chessBoard.chessTiles[this.x, yy].currentFigure == null)
+                    {
+                        moveList.Add(new ChessPosition(this.x, yy + 1,this));
+                        this.FirstStep = false;
+                    }
                     if (yy < 8 && chessBoard.chessTiles[this.x, yy].currentFigure == null)
                     {
                         moveList.Add(new ChessPosition(this.x, yy,this));

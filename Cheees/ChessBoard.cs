@@ -380,7 +380,7 @@ namespace Cheees
             }
             else
             {
-                step(aIalpha.MinMaxRoot(1, this, "WHITE"));
+                step(aIalpha.MinMaxRoot(4, this, "WHITE"));
                 for (int i = 0; i < CheeesWhite.Count; i++)
                 {
                     for (int j = 0; j < CheeesBlack.Count; j++)
